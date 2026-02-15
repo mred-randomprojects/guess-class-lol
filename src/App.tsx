@@ -2,7 +2,8 @@ import { useState, useCallback } from "react";
 import { useChampions, getImageUrl } from "./data/useChampions";
 import {
     pickRandomChampion,
-    validateGuess,
+    isExactMatch,
+    classifyGuess,
     buildHistoryEntry,
 } from "./gameLogic";
 import type { ChampionClass } from "./data/classes";
@@ -55,34 +56,41 @@ function HistoryList({ history }: { history: HistoryEntry[] }) {
     return (
         <section className="rounded-xl border border-gray-700 bg-rift-card/80 p-4">
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-rift-muted">
-                History
+                Attempt history
             </h2>
             <ul className="space-y-2">
                 {history
-                    .slice(-10)
+                    .slice(-15)
                     .reverse()
                     .map((entry, i) => (
                         <li
                             key={`${entry.champion.id}-${
                                 history.length - 1 - i
                             }`}
-                            className="flex items-center justify-between gap-2 text-sm"
+                            className="flex items-center gap-3 text-sm"
                         >
-                            <span className="font-medium text-white">
+                            <span className="w-24 shrink-0 truncate font-medium text-white">
                                 {entry.champion.name}
                             </span>
-                            <span
-                                className={
-                                    entry.correct
-                                        ? "text-emerald-400"
-                                        : "text-red-400"
-                                }
-                            >
-                                {entry.correct ? "Correct" : "Wrong"}
-                            </span>
-                            <span className="text-rift-muted">
-                                {entry.correctClasses.join(" / ")}
-                            </span>
+                            <div className="flex flex-wrap gap-1">
+                                {entry.guessResults.map((r) => (
+                                    <span
+                                        key={r.cls}
+                                        className={`rounded px-2 py-0.5 text-xs font-medium ${
+                                            r.hit
+                                                ? "bg-emerald-900/60 text-emerald-400"
+                                                : "bg-red-900/60 text-red-400"
+                                        }`}
+                                    >
+                                        {r.cls}
+                                    </span>
+                                ))}
+                            </div>
+                            {entry.exactMatch && (
+                                <span className="ml-auto text-xs text-emerald-400">
+                                    Solved
+                                </span>
+                            )}
                         </li>
                     ))}
             </ul>
@@ -97,11 +105,9 @@ function App() {
     );
     const [selectedClasses, setSelectedClasses] = useState<ChampionClass[]>([]);
     const [score, setScore] = useState(0);
+    const [totalChampions, setTotalChampions] = useState(0);
+    const [attemptsOnCurrent, setAttemptsOnCurrent] = useState(0);
     const [history, setHistory] = useState<HistoryEntry[]>([]);
-    const [lastResult, setLastResult] = useState<{
-        correct: boolean;
-        correctClasses: readonly ChampionClass[];
-    } | null>(null);
 
     const toggleClass = useCallback((cls: ChampionClass) => {
         setSelectedClasses((prev) => {
@@ -109,22 +115,39 @@ function App() {
             if (prev.length >= MAX_SELECTION) return prev;
             return [...prev, cls];
         });
-        setLastResult(null);
     }, []);
 
     const submitGuess = useCallback(() => {
         if (current == null) return;
-        const correct = validateGuess(current.classes, selectedClasses);
-        setScore((s) => s + (correct ? 1 : 0));
-        setHistory((h) => [
-            ...h,
-            buildHistoryEntry(current, selectedClasses, correct),
-        ]);
-        setLastResult({ correct, correctClasses: current.classes });
+        const exact = isExactMatch(current.classes, selectedClasses);
+        const results = classifyGuess(current.classes, selectedClasses);
+
+        setHistory((h) => [...h, buildHistoryEntry(current, results, exact)]);
         setSelectedClasses([]);
-        const next = pickRandomChampion(champions, getGameChampion);
-        setCurrent(next);
-    }, [current, selectedClasses, champions, getGameChampion]);
+
+        if (exact) {
+            // Score +1 only on first-attempt correct (1-shot)
+            if (attemptsOnCurrent === 0) {
+                setScore((s) => s + 1);
+            }
+            setTotalChampions((t) => t + 1);
+            setAttemptsOnCurrent(0);
+            const next = pickRandomChampion(champions, getGameChampion);
+            setCurrent(next);
+        } else {
+            // Stay on the same champion
+            setAttemptsOnCurrent((a) => a + 1);
+        }
+
+        // TODO: after 3 failed attempts, show a "Give up" button that reveals
+        // the answer and advances to the next champion (without awarding a point).
+    }, [
+        current,
+        selectedClasses,
+        champions,
+        getGameChampion,
+        attemptsOnCurrent,
+    ]);
 
     if (champions.length === 0) {
         return (
@@ -156,7 +179,7 @@ function App() {
                         LoL Champion Class Quiz
                     </h1>
                     <span className="rounded-full bg-rift-gold/20 px-4 py-1 text-rift-gold">
-                        Score: {score}
+                        Score: {score} / {totalChampions}
                     </span>
                 </div>
             </header>
@@ -164,7 +187,7 @@ function App() {
             <main className="mx-auto max-w-4xl space-y-8 p-6">
                 <section className="flex flex-col items-center gap-6 rounded-2xl border border-gray-700 bg-rift-card/60 p-8">
                     <p className="text-sm uppercase tracking-wider text-rift-muted">
-                        Who is this champion?
+                        What class is this champion?
                     </p>
                     <div className="flex flex-col items-center gap-4">
                         <img
@@ -176,19 +199,9 @@ function App() {
                             {current.name}
                         </span>
                     </div>
-                    {lastResult !== null && (
-                        <p
-                            className={
-                                lastResult.correct
-                                    ? "text-emerald-400"
-                                    : "text-red-400"
-                            }
-                        >
-                            {lastResult.correct
-                                ? "Correct!"
-                                : `Actual: ${lastResult.correctClasses.join(
-                                      ", "
-                                  )}`}
+                    {attemptsOnCurrent > 0 && (
+                        <p className="text-sm text-rift-muted">
+                            Attempt {attemptsOnCurrent + 1} — keep trying!
                         </p>
                     )}
                 </section>

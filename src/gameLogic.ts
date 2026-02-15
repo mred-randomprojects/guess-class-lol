@@ -1,5 +1,10 @@
 import type { ChampionClass } from "./data/classes";
-import type { Champion, GameChampion, HistoryEntry } from "./types";
+import type {
+    Champion,
+    GameChampion,
+    ClassGuessResult,
+    HistoryEntry,
+} from "./types";
 
 export function pickRandomChampion(
     champions: Champion[],
@@ -10,7 +15,8 @@ export function pickRandomChampion(
     return getGameChampion(c);
 }
 
-export function validateGuess(
+/** Check if a guess is an exact match (same classes, same count). */
+export function isExactMatch(
     actual: readonly ChampionClass[],
     guessed: readonly ChampionClass[]
 ): boolean {
@@ -20,10 +26,21 @@ export function validateGuess(
     return a.every((x, i) => x === g[i]);
 }
 
+/** Classify each guessed class as a hit (in champion's classes) or miss. */
+export function classifyGuess(
+    actual: readonly ChampionClass[],
+    guessed: readonly ChampionClass[]
+): ClassGuessResult[] {
+    return guessed.map((cls) => ({
+        cls,
+        hit: actual.includes(cls),
+    }));
+}
+
 export function buildHistoryEntry(
     champion: GameChampion,
-    guessedClasses: readonly ChampionClass[],
-    correct: boolean
+    guessResults: ClassGuessResult[],
+    exactMatch: boolean
 ): HistoryEntry {
     return {
         champion: {
@@ -31,8 +48,7 @@ export function buildHistoryEntry(
             name: champion.name,
             image: champion.image,
         },
-        correctClasses: champion.classes,
-        guessedClasses: [...guessedClasses],
-        correct,
+        guessResults,
+        exactMatch,
     };
 }
