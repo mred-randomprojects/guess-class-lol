@@ -7,29 +7,46 @@ import {
 } from "./gameLogic";
 import type { ChampionClass } from "./data/classes";
 import type { GameChampion, HistoryEntry } from "./types";
-import { CHAMPION_CLASSES } from "./data/classes";
+import { CLASS_GROUPS, CLASS_DESCRIPTIONS } from "./data/classes";
+
+const MAX_SELECTION = 2;
 
 function ClassButton({
     label,
+    description,
     selected,
+    disabled,
     onToggle,
 }: {
     label: string;
+    description: string;
     selected: boolean;
+    disabled: boolean;
     onToggle: () => void;
 }) {
     return (
-        <button
-            type="button"
-            onClick={onToggle}
-            className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
-                selected
-                    ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
-                    : "border-rift-muted bg-rift-card text-gray-300 hover:border-gray-500 hover:bg-gray-800"
-            }`}
-        >
-            {label}
-        </button>
+        <div className="group relative inline-block">
+            <button
+                type="button"
+                onClick={onToggle}
+                disabled={disabled}
+                className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                    selected
+                        ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
+                        : disabled
+                        ? "cursor-not-allowed border-gray-700 bg-gray-800/50 text-gray-500"
+                        : "border-rift-muted bg-rift-card text-gray-300 hover:border-gray-500 hover:bg-gray-800"
+                }`}
+            >
+                {label}
+            </button>
+            <div
+                role="tooltip"
+                className="invisible absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-left text-sm font-normal text-gray-200 shadow-xl opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100"
+            >
+                {description}
+            </div>
+        </div>
     );
 }
 
@@ -87,9 +104,11 @@ function App() {
     } | null>(null);
 
     const toggleClass = useCallback((cls: ChampionClass) => {
-        setSelectedClasses((prev) =>
-            prev.includes(cls) ? prev.filter((c) => c !== cls) : [...prev, cls]
-        );
+        setSelectedClasses((prev) => {
+            if (prev.includes(cls)) return prev.filter((c) => c !== cls);
+            if (prev.length >= MAX_SELECTION) return prev;
+            return [...prev, cls];
+        });
         setLastResult(null);
     }, []);
 
@@ -176,16 +195,40 @@ function App() {
 
                 <section className="rounded-2xl border border-gray-700 bg-rift-card/60 p-6">
                     <p className="mb-4 text-sm text-rift-muted">
-                        Select all classes that apply (1 or 2). Then submit.
+                        Select up to 2 classes that apply. Then submit.
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                        {CHAMPION_CLASSES.map((cls) => (
-                            <ClassButton
-                                key={cls}
-                                label={cls}
-                                selected={selectedClasses.includes(cls)}
-                                onToggle={() => toggleClass(cls)}
-                            />
+                    <div className="flex flex-wrap gap-6">
+                        {CLASS_GROUPS.map((group) => (
+                            <div
+                                key={group.parent}
+                                className="flex flex-col gap-2"
+                            >
+                                <span className="text-xs font-semibold uppercase tracking-wider text-rift-muted">
+                                    {group.parent}
+                                </span>
+                                <div className="flex flex-wrap gap-2">
+                                    {group.subclasses.map((cls) => (
+                                        <ClassButton
+                                            key={cls}
+                                            label={cls}
+                                            description={
+                                                CLASS_DESCRIPTIONS[cls]
+                                            }
+                                            selected={selectedClasses.includes(
+                                                cls
+                                            )}
+                                            disabled={
+                                                !selectedClasses.includes(
+                                                    cls
+                                                ) &&
+                                                selectedClasses.length >=
+                                                    MAX_SELECTION
+                                            }
+                                            onToggle={() => toggleClass(cls)}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
                         ))}
                     </div>
                     <div className="mt-6">
