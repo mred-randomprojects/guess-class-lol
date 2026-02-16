@@ -7,7 +7,7 @@ import {
     buildHistoryEntry,
 } from "./gameLogic";
 import type { ChampionClass } from "./data/classes";
-import type { GameChampion, HistoryEntry } from "./types";
+import type { HistoryEntry } from "./types";
 import { CLASS_GROUPS, CLASS_DESCRIPTIONS } from "./data/classes";
 
 const MAX_SELECTION = 2;
