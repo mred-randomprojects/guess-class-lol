@@ -21,6 +21,11 @@ export interface HistoryEntry {
     exactMatch: boolean;
 }
 
+export interface MissedChampion {
+    champion: Champion;
+    actualClasses: readonly ChampionClass[];
+}
+
 export interface GameState {
     score: number;
     totalChampions: number;

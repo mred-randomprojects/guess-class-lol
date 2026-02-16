@@ -7,7 +7,7 @@ import {
     buildHistoryEntry,
 } from "./gameLogic";
 import type { ChampionClass } from "./data/classes";
-import type { HistoryEntry } from "./types";
+import type { Champion, HistoryEntry, MissedChampion } from "./types";
 import { CLASS_GROUPS, CLASS_DESCRIPTIONS } from "./data/classes";
 
 const MAX_SELECTION = 2;
@@ -107,6 +107,118 @@ function HistoryList({ history }: { history: HistoryEntry[] }) {
     );
 }
 
+const NEXT_UP_COUNT = 3;
+
+function NextUpPreview({ champions }: { champions: Champion[] }) {
+    if (champions.length === 0) return null;
+    return (
+        <div className="flex items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-rift-muted">
+                Next up
+            </span>
+            <div className="flex gap-2">
+                {champions.map((c) => (
+                    <img
+                        key={c.id}
+                        src={getImageUrl(c)}
+                        alt={c.name}
+                        title={c.name}
+                        className="h-10 w-10 rounded-lg object-cover ring-1 ring-gray-600"
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function FinishReport({
+    score,
+    totalChampions,
+    missed,
+    onRestart,
+}: {
+    score: number;
+    totalChampions: number;
+    missed: readonly MissedChampion[];
+    onRestart: () => void;
+}) {
+    const percentage =
+        totalChampions > 0 ? Math.round((score / totalChampions) * 100) : 0;
+
+    return (
+        <div className="min-h-screen bg-rift-dark font-body text-gray-100">
+            <header className="border-b border-gray-800 bg-rift-card/50 px-6 py-4">
+                <div className="mx-auto flex max-w-4xl items-center justify-between">
+                    <h1 className="text-xl font-bold tracking-tight text-rift-gold">
+                        LoL Champion Class Quiz — Results
+                    </h1>
+                </div>
+            </header>
+            <main className="mx-auto max-w-4xl space-y-8 p-6">
+                <section className="flex flex-col items-center gap-4 rounded-2xl border border-gray-700 bg-rift-card/60 p-8">
+                    <p className="text-sm uppercase tracking-wider text-rift-muted">
+                        Final score
+                    </p>
+                    <span className="text-4xl font-bold text-rift-gold">
+                        {score} / {totalChampions}
+                    </span>
+                    <span className="text-lg text-gray-300">
+                        {percentage}% first-attempt accuracy
+                    </span>
+                </section>
+
+                {missed.length > 0 && (
+                    <section className="rounded-xl border border-gray-700 bg-rift-card/80 p-4">
+                        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-rift-muted">
+                            Champions you missed
+                        </h2>
+                        <ul className="space-y-2">
+                            {missed.map((m) => (
+                                <li
+                                    key={m.champion.id}
+                                    className="flex items-center gap-3 text-sm"
+                                >
+                                    <img
+                                        src={getImageUrl(m.champion)}
+                                        alt={m.champion.name}
+                                        className="h-8 w-8 rounded-lg object-cover ring-1 ring-gray-600"
+                                    />
+                                    <span className="w-28 shrink-0 truncate font-medium text-white">
+                                        {m.champion.name}
+                                    </span>
+                                    <span className="text-gray-400">
+                                        is actually
+                                    </span>
+                                    <div className="flex gap-1">
+                                        {m.actualClasses.map((cls) => (
+                                            <span
+                                                key={cls}
+                                                className="rounded bg-emerald-900/60 px-2 py-0.5 text-xs font-medium text-emerald-400"
+                                            >
+                                                {cls}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                )}
+
+                <div className="flex justify-center">
+                    <button
+                        type="button"
+                        onClick={onRestart}
+                        className="rounded-lg bg-rift-gold px-6 py-2 font-semibold text-rift-dark hover:bg-rift-gold/90"
+                    >
+                        Play again
+                    </button>
+                </div>
+            </main>
+        </div>
+    );
+}
+
 function App() {
     const { champions, getGameChampion } = useChampions();
     const [queue, setQueue] = useState(() => shuffleChampions(champions));
@@ -118,6 +230,13 @@ function App() {
     const [totalChampions, setTotalChampions] = useState(0);
     const [attemptsOnCurrent, setAttemptsOnCurrent] = useState(0);
     const [history, setHistory] = useState<HistoryEntry[]>([]);
+    const [missed, setMissed] = useState<MissedChampion[]>([]);
+    const [finished, setFinished] = useState(false);
+
+    const nextUpChampions = useMemo(
+        () => queue.slice(queueIndex + 1, queueIndex + 1 + NEXT_UP_COUNT),
+        [queue, queueIndex]
+    );
 
     const toggleClass = useCallback((cls: ChampionClass) => {
         setSelectedClasses((prev) => {
@@ -155,6 +274,11 @@ function App() {
             // Score +1 only on first-attempt correct (1-shot)
             if (attemptsOnCurrent === 0) {
                 setScore((s) => s + 1);
+            } else {
+                setMissed((prev) => [
+                    ...prev,
+                    { champion: current, actualClasses: current.classes },
+                ]);
             }
             setTotalChampions((t) => t + 1);
             setAttemptsOnCurrent(0);
@@ -180,6 +304,33 @@ function App() {
         queueIndex,
         queue.length,
     ]);
+
+    const finishGame = useCallback(() => {
+        setFinished(true);
+    }, []);
+
+    const restart = useCallback(() => {
+        setQueue(shuffleChampions(champions));
+        setQueueIndex(0);
+        setSelectedClasses([]);
+        setScore(0);
+        setTotalChampions(0);
+        setAttemptsOnCurrent(0);
+        setHistory([]);
+        setMissed([]);
+        setFinished(false);
+    }, [champions]);
+
+    if (finished) {
+        return (
+            <FinishReport
+                score={score}
+                totalChampions={totalChampions}
+                missed={missed}
+                onRestart={restart}
+            />
+        );
+    }
 
     if (champions.length === 0) {
         return (
@@ -210,9 +361,21 @@ function App() {
                     <h1 className="text-xl font-bold tracking-tight text-rift-gold">
                         LoL Champion Class Quiz
                     </h1>
-                    <span className="rounded-full bg-rift-gold/20 px-4 py-1 text-rift-gold">
-                        Score: {score} / {totalChampions}
-                    </span>
+                    <div className="flex items-center gap-4">
+                        <span className="text-sm text-rift-muted">
+                            {queueIndex + 1} / {queue.length} champs
+                        </span>
+                        <span className="rounded-full bg-rift-gold/20 px-4 py-1 text-rift-gold">
+                            Score: {score} / {totalChampions}
+                        </span>
+                        <button
+                            type="button"
+                            onClick={finishGame}
+                            className="rounded-lg border border-gray-600 px-3 py-1 text-sm text-gray-300 hover:border-gray-400 hover:text-white"
+                        >
+                            Finish
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -236,6 +399,7 @@ function App() {
                             Attempt {attemptsOnCurrent + 1} — keep trying!
                         </p>
                     )}
+                    <NextUpPreview champions={nextUpChampions} />
                 </section>
 
                 <section className="rounded-2xl border border-gray-700 bg-rift-card/60 p-6">
