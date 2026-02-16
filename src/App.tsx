@@ -520,10 +520,9 @@ function App() {
             setTotalChampions((t) => t + 1);
             setAttemptsOnCurrent(0);
             setDiscardedClasses(new Set());
-            // Advance to next champion; reshuffle when we've gone through all
+            // Advance to next champion; finish if we've gone through all
             if (queueIndex + 1 >= queue.length) {
-                setQueue(shuffleChampions(filteredChampions));
-                setQueueIndex(0);
+                setFinished(true);
             } else {
                 setQueueIndex((i) => i + 1);
             }
@@ -539,7 +538,6 @@ function App() {
         effectiveClasses,
         extraClasses,
         selectedClasses,
-        filteredChampions,
         attemptsOnCurrent,
         queueIndex,
         queue.length,
