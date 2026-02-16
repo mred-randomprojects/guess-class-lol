@@ -6,13 +6,14 @@ import type {
     HistoryEntry,
 } from "./types";
 
-export function pickRandomChampion(
-    champions: Champion[],
-    getGameChampion: (c: Champion) => GameChampion
-): GameChampion | null {
-    if (champions.length === 0) return null;
-    const c = champions[Math.floor(Math.random() * champions.length)];
-    return getGameChampion(c);
+/** Fisher-Yates shuffle, returns a new array. */
+export function shuffleChampions(champions: readonly Champion[]): Champion[] {
+    const shuffled = [...champions];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
 
 /** Check if a guess is an exact match (same classes, same count). */

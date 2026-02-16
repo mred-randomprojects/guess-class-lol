@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import { useChampions, getImageUrl } from "./data/useChampions";
 import {
-    pickRandomChampion,
+    shuffleChampions,
     isExactMatch,
     classifyGuess,
     buildHistoryEntry,
@@ -109,9 +109,10 @@ function HistoryList({ history }: { history: HistoryEntry[] }) {
 
 function App() {
     const { champions, getGameChampion } = useChampions();
-    const [current, setCurrent] = useState<GameChampion | null>(() =>
-        pickRandomChampion(champions, getGameChampion)
-    );
+    const [queue, setQueue] = useState(() => shuffleChampions(champions));
+    const [queueIndex, setQueueIndex] = useState(0);
+    const current =
+        queue.length > 0 ? getGameChampion(queue[queueIndex]) : null;
     const [selectedClasses, setSelectedClasses] = useState<ChampionClass[]>([]);
     const [score, setScore] = useState(0);
     const [totalChampions, setTotalChampions] = useState(0);
@@ -157,8 +158,13 @@ function App() {
             }
             setTotalChampions((t) => t + 1);
             setAttemptsOnCurrent(0);
-            const next = pickRandomChampion(champions, getGameChampion);
-            setCurrent(next);
+            // Advance to next champion; reshuffle when we've gone through all
+            if (queueIndex + 1 >= queue.length) {
+                setQueue(shuffleChampions(champions));
+                setQueueIndex(0);
+            } else {
+                setQueueIndex((i) => i + 1);
+            }
         } else {
             // Stay on the same champion
             setAttemptsOnCurrent((a) => a + 1);
@@ -170,8 +176,9 @@ function App() {
         current,
         selectedClasses,
         champions,
-        getGameChampion,
         attemptsOnCurrent,
+        queueIndex,
+        queue.length,
     ]);
 
     if (champions.length === 0) {
