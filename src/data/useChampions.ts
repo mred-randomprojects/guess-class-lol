@@ -25,15 +25,32 @@ export function getImageUrl(champion: Champion): string {
     return `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image}`;
 }
 
+// Pre-computed map: class → list of champions that have that class
+const champsByClass: ReadonlyMap<ChampionClass, readonly Champion[]> =
+    (() => {
+        const map = new Map<ChampionClass, Champion[]>();
+        for (const champion of championList) {
+            const classes = getClassesForChampion(champion.id);
+            for (const cls of classes) {
+                const list = map.get(cls) ?? [];
+                list.push(champion);
+                map.set(cls, list);
+            }
+        }
+        return map;
+    })();
+
 export function useChampions(): {
     champions: Champion[];
     getGameChampion: (champion: Champion) => GameChampion;
+    championsByClass: ReadonlyMap<ChampionClass, readonly Champion[]>;
     imageVersion: string;
 } {
     return useMemo(
         () => ({
             champions: championList,
             imageVersion: version,
+            championsByClass: champsByClass,
             getGameChampion(c: Champion): GameChampion {
                 return {
                     ...c,

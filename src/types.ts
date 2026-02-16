@@ -19,11 +19,13 @@ export interface HistoryEntry {
     champion: Champion;
     guessResults: readonly ClassGuessResult[];
     exactMatch: boolean;
+    extraClasses: readonly ChampionClass[];
 }
 
 export interface MissedChampion {
     champion: Champion;
     actualClasses: readonly ChampionClass[];
+    extraClasses: readonly ChampionClass[];
 }
 
 export interface GameState {

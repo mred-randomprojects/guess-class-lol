@@ -41,7 +41,8 @@ export function classifyGuess(
 export function buildHistoryEntry(
     champion: GameChampion,
     guessResults: ClassGuessResult[],
-    exactMatch: boolean
+    exactMatch: boolean,
+    extraClasses: readonly ChampionClass[]
 ): HistoryEntry {
     return {
         champion: {
@@ -51,5 +52,6 @@ export function buildHistoryEntry(
         },
         guessResults,
         exactMatch,
+        extraClasses,
     };
 }

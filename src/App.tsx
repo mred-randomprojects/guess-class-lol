@@ -8,7 +8,7 @@ import {
 } from "./gameLogic";
 import type { ChampionClass } from "./data/classes";
 import type { Champion, HistoryEntry, MissedChampion } from "./types";
-import { CLASS_GROUPS, CLASS_DESCRIPTIONS } from "./data/classes";
+import { CHAMPION_CLASSES, CLASS_GROUPS, CLASS_DESCRIPTIONS } from "./data/classes";
 
 const MAX_SELECTION = 2;
 
@@ -110,6 +110,12 @@ function HistoryList({ history }: { history: HistoryEntry[] }) {
                                     </span>
                                 ))}
                             </div>
+                            {entry.extraClasses.length > 0 && (
+                                <span className="text-xs italic text-gray-500">
+                                    also:{" "}
+                                    {entry.extraClasses.join(", ")}
+                                </span>
+                            )}
                             {entry.exactMatch && (
                                 <span className="ml-auto text-xs text-emerald-400">
                                     Solved
@@ -214,6 +220,12 @@ function FinishReport({
                                             </span>
                                         ))}
                                     </div>
+                                    {m.extraClasses.length > 0 && (
+                                        <span className="text-xs italic text-gray-500">
+                                            also:{" "}
+                                            {m.extraClasses.join(", ")}
+                                        </span>
+                                    )}
                                 </li>
                             ))}
                         </ul>
@@ -234,9 +246,149 @@ function FinishReport({
     );
 }
 
+function ConfigScreen({
+    championsByClass,
+    enabledClasses,
+    poolSize,
+    onToggleClass,
+    onSelectAll,
+    onDeselectAll,
+    onLaunch,
+}: {
+    championsByClass: ReadonlyMap<ChampionClass, readonly Champion[]>;
+    enabledClasses: ReadonlySet<ChampionClass>;
+    poolSize: number;
+    onToggleClass: (cls: ChampionClass) => void;
+    onSelectAll: () => void;
+    onDeselectAll: () => void;
+    onLaunch: () => void;
+}) {
+    return (
+        <div className="min-h-screen bg-rift-dark font-body text-gray-100">
+            <header className="border-b border-gray-800 bg-rift-card/50 px-6 py-4">
+                <div className="mx-auto max-w-5xl">
+                    <h1 className="text-xl font-bold tracking-tight text-rift-gold">
+                        LoL Champion Class Quiz — Setup
+                    </h1>
+                </div>
+            </header>
+            <main className="mx-auto max-w-5xl space-y-6 p-6">
+                <div className="flex items-center justify-between">
+                    <p className="text-sm text-rift-muted">
+                        Choose which classes to practice:
+                    </p>
+                    <div className="flex gap-2">
+                        <button
+                            type="button"
+                            onClick={onSelectAll}
+                            className="rounded border border-gray-600 px-3 py-1 text-xs text-gray-300 hover:border-gray-400 hover:text-white"
+                        >
+                            Select all
+                        </button>
+                        <button
+                            type="button"
+                            onClick={onDeselectAll}
+                            className="rounded border border-gray-600 px-3 py-1 text-xs text-gray-300 hover:border-gray-400 hover:text-white"
+                        >
+                            Deselect all
+                        </button>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                    {CHAMPION_CLASSES.map((cls) => {
+                        const examples = championsByClass.get(cls) ?? [];
+                        const main = examples[0];
+                        const others = examples.slice(1, 4);
+                        const enabled = enabledClasses.has(cls);
+
+                        return (
+                            <button
+                                key={cls}
+                                type="button"
+                                onClick={() => onToggleClass(cls)}
+                                className={`flex flex-col items-center gap-3 rounded-xl border-2 p-4 text-left transition-colors ${
+                                    enabled
+                                        ? "border-rift-gold/60 bg-rift-card/80"
+                                        : "border-gray-700/50 bg-rift-card/30 opacity-50"
+                                }`}
+                            >
+                                <div className="flex w-full items-center gap-2">
+                                    <div
+                                        className={`h-4 w-4 shrink-0 rounded border ${
+                                            enabled
+                                                ? "border-rift-gold bg-rift-gold"
+                                                : "border-gray-500 bg-transparent"
+                                        }`}
+                                    />
+                                    <span className="text-sm font-semibold text-white">
+                                        {cls}
+                                    </span>
+                                    <span className="ml-auto text-xs text-rift-muted">
+                                        {examples.length}
+                                    </span>
+                                </div>
+                                {main != null && (
+                                    <img
+                                        src={getImageUrl(main)}
+                                        alt={main.name}
+                                        title={main.name}
+                                        className="h-20 w-20 rounded-xl object-cover ring-1 ring-gray-600"
+                                    />
+                                )}
+                                <div className="flex gap-1.5">
+                                    {others.map((c) => (
+                                        <img
+                                            key={c.id}
+                                            src={getImageUrl(c)}
+                                            alt={c.name}
+                                            title={c.name}
+                                            className="h-8 w-8 rounded-lg object-cover ring-1 ring-gray-600"
+                                        />
+                                    ))}
+                                </div>
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <section className="flex flex-col items-center gap-4 rounded-2xl border border-gray-700 bg-rift-card/60 p-6">
+                    <p className="text-lg text-gray-300">
+                        <span className="font-bold text-rift-gold">
+                            {poolSize}
+                        </span>{" "}
+                        champions in pool
+                    </p>
+                    <button
+                        type="button"
+                        onClick={onLaunch}
+                        disabled={poolSize === 0}
+                        className="rounded-lg bg-rift-gold px-8 py-3 text-lg font-semibold text-rift-dark hover:bg-rift-gold/90 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                        Launch Game
+                    </button>
+                    {poolSize === 0 && (
+                        <p className="text-sm text-red-400">
+                            Select at least one class to start.
+                        </p>
+                    )}
+                </section>
+            </main>
+        </div>
+    );
+}
+
 function App() {
-    const { champions, getGameChampion } = useChampions();
-    const [queue, setQueue] = useState(() => shuffleChampions(champions));
+    const { champions, getGameChampion, championsByClass } = useChampions();
+
+    // --- Config state (persists across games) ---
+    const [enabledClasses, setEnabledClasses] = useState<Set<ChampionClass>>(
+        () => new Set(CHAMPION_CLASSES)
+    );
+    const [gameStarted, setGameStarted] = useState(false);
+
+    // --- Game state (reset on each launch) ---
+    const [queue, setQueue] = useState<Champion[]>([]);
     const [queueIndex, setQueueIndex] = useState(0);
     const current =
         queue.length > 0 ? getGameChampion(queue[queueIndex]) : null;
@@ -250,6 +402,40 @@ function App() {
     const [discardedClasses, setDiscardedClasses] = useState<
         Set<ChampionClass>
     >(new Set());
+
+    // Champions that have at least one enabled class
+    const filteredChampions = useMemo(
+        () =>
+            champions.filter((c) => {
+                const gc = getGameChampion(c);
+                return gc.classes.some((cls) => enabledClasses.has(cls));
+            }),
+        [champions, getGameChampion, enabledClasses]
+    );
+
+    // Effective classes for the current champion (intersection with enabled)
+    const effectiveClasses: readonly ChampionClass[] = useMemo(() => {
+        if (current == null) return [];
+        return current.classes.filter((cls) => enabledClasses.has(cls));
+    }, [current, enabledClasses]);
+
+    // Classes the champion has that are NOT in the enabled set
+    const extraClasses: readonly ChampionClass[] = useMemo(() => {
+        if (current == null) return [];
+        return current.classes.filter((cls) => !enabledClasses.has(cls));
+    }, [current, enabledClasses]);
+
+    // Only show groups/subclasses that are enabled
+    const filteredGroups = useMemo(
+        () =>
+            CLASS_GROUPS.map((group) => ({
+                ...group,
+                subclasses: group.subclasses.filter((cls) =>
+                    enabledClasses.has(cls)
+                ),
+            })).filter((group) => group.subclasses.length > 0),
+        [enabledClasses]
+    );
 
     const nextUpChampions = useMemo(
         () => queue.slice(queueIndex + 1, queueIndex + 1 + NEXT_UP_COUNT),
@@ -308,10 +494,13 @@ function App() {
 
     const submitGuess = useCallback(() => {
         if (current == null) return;
-        const exact = isExactMatch(current.classes, selectedClasses);
-        const results = classifyGuess(current.classes, selectedClasses);
+        const exact = isExactMatch(effectiveClasses, selectedClasses);
+        const results = classifyGuess(effectiveClasses, selectedClasses);
 
-        setHistory((h) => [...h, buildHistoryEntry(current, results, exact)]);
+        setHistory((h) => [
+            ...h,
+            buildHistoryEntry(current, results, exact, extraClasses),
+        ]);
         setSelectedClasses([]);
 
         if (exact) {
@@ -321,7 +510,11 @@ function App() {
             } else {
                 setMissed((prev) => [
                     ...prev,
-                    { champion: current, actualClasses: current.classes },
+                    {
+                        champion: current,
+                        actualClasses: effectiveClasses,
+                        extraClasses,
+                    },
                 ]);
             }
             setTotalChampions((t) => t + 1);
@@ -329,7 +522,7 @@ function App() {
             setDiscardedClasses(new Set());
             // Advance to next champion; reshuffle when we've gone through all
             if (queueIndex + 1 >= queue.length) {
-                setQueue(shuffleChampions(champions));
+                setQueue(shuffleChampions(filteredChampions));
                 setQueueIndex(0);
             } else {
                 setQueueIndex((i) => i + 1);
@@ -343,8 +536,10 @@ function App() {
         // the answer and advances to the next champion (without awarding a point).
     }, [
         current,
+        effectiveClasses,
+        extraClasses,
         selectedClasses,
-        champions,
+        filteredChampions,
         attemptsOnCurrent,
         queueIndex,
         queue.length,
@@ -354,8 +549,34 @@ function App() {
         setFinished(true);
     }, []);
 
-    const restart = useCallback(() => {
-        setQueue(shuffleChampions(champions));
+    const backToConfig = useCallback(() => {
+        setGameStarted(false);
+        setFinished(false);
+    }, []);
+
+    // --- Config screen callbacks ---
+    const toggleEnabledClass = useCallback((cls: ChampionClass) => {
+        setEnabledClasses((prev) => {
+            const next = new Set(prev);
+            if (next.has(cls)) {
+                next.delete(cls);
+            } else {
+                next.add(cls);
+            }
+            return next;
+        });
+    }, []);
+
+    const selectAllClasses = useCallback(() => {
+        setEnabledClasses(new Set(CHAMPION_CLASSES));
+    }, []);
+
+    const deselectAllClasses = useCallback(() => {
+        setEnabledClasses(new Set());
+    }, []);
+
+    const launchGame = useCallback(() => {
+        setQueue(shuffleChampions(filteredChampions));
         setQueueIndex(0);
         setSelectedClasses([]);
         setScore(0);
@@ -365,7 +586,22 @@ function App() {
         setMissed([]);
         setFinished(false);
         setDiscardedClasses(new Set());
-    }, [champions]);
+        setGameStarted(true);
+    }, [filteredChampions]);
+
+    if (!gameStarted) {
+        return (
+            <ConfigScreen
+                championsByClass={championsByClass}
+                enabledClasses={enabledClasses}
+                poolSize={filteredChampions.length}
+                onToggleClass={toggleEnabledClass}
+                onSelectAll={selectAllClasses}
+                onDeselectAll={deselectAllClasses}
+                onLaunch={launchGame}
+            />
+        );
+    }
 
     if (finished) {
         return (
@@ -373,7 +609,7 @@ function App() {
                 score={score}
                 totalChampions={totalChampions}
                 missed={missed}
-                onRestart={restart}
+                onRestart={backToConfig}
             />
         );
     }
@@ -467,7 +703,7 @@ function App() {
                         </div>
                     </div>
                     <div className="flex flex-wrap gap-6">
-                        {CLASS_GROUPS.map((group) => (
+                        {filteredGroups.map((group) => (
                             <div
                                 key={group.parent}
                                 className="flex flex-col gap-2"
