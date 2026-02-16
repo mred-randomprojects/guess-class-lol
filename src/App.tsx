@@ -336,16 +336,45 @@ function ConfigScreen({
                                         className="h-20 w-20 rounded-xl object-cover ring-1 ring-gray-600"
                                     />
                                 )}
-                                <div className="flex gap-1.5">
-                                    {others.map((c) => (
-                                        <img
-                                            key={c.id}
-                                            src={getImageUrl(c)}
-                                            alt={c.name}
-                                            title={c.name}
-                                            className="h-8 w-8 rounded-lg object-cover ring-1 ring-gray-600"
-                                        />
-                                    ))}
+                                <div className="group/thumbs relative">
+                                    <div className="flex gap-1.5">
+                                        {others.map((c) => (
+                                            <img
+                                                key={c.id}
+                                                src={getImageUrl(c)}
+                                                alt={c.name}
+                                                title={c.name}
+                                                className="h-8 w-8 rounded-lg object-cover ring-1 ring-gray-600"
+                                            />
+                                        ))}
+                                    </div>
+                                    <div
+                                        role="tooltip"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="invisible absolute bottom-full left-1/2 z-50 mb-2 w-52 -translate-x-1/2 rounded-xl border border-gray-600 bg-gray-900 p-3 shadow-xl opacity-0 transition-opacity duration-150 group-hover/thumbs:visible group-hover/thumbs:opacity-100"
+                                    >
+                                        <p className="mb-2 text-xs font-semibold text-rift-muted">
+                                            All {cls} champions (
+                                            {examples.length})
+                                        </p>
+                                        <ul className="max-h-64 space-y-1 overflow-y-auto">
+                                            {examples.map((c) => (
+                                                <li
+                                                    key={c.id}
+                                                    className="flex items-center gap-2"
+                                                >
+                                                    <img
+                                                        src={getImageUrl(c)}
+                                                        alt={c.name}
+                                                        className="h-6 w-6 shrink-0 rounded object-cover"
+                                                    />
+                                                    <span className="text-xs text-gray-200">
+                                                        {c.name}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </button>
                         );
