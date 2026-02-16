@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { useChampions, getImageUrl } from "./data/useChampions";
 import {
     pickRandomChampion,
@@ -17,14 +17,19 @@ function ClassButton({
     description,
     selected,
     disabled,
+    triedStatus,
     onToggle,
 }: {
     label: string;
     description: string;
     selected: boolean;
     disabled: boolean;
+    triedStatus: "hit" | "miss" | null;
     onToggle: () => void;
 }) {
+    const triedHit = triedStatus === "hit";
+    const triedMiss = triedStatus === "miss";
+
     return (
         <div className="group relative inline-block">
             <button
@@ -36,6 +41,10 @@ function ClassButton({
                         ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
                         : disabled
                         ? "cursor-not-allowed border-gray-700 bg-gray-800/50 text-gray-500"
+                        : triedHit
+                        ? "border-emerald-700/50 bg-emerald-900/20 text-emerald-400/80 hover:border-emerald-600 hover:bg-emerald-900/30"
+                        : triedMiss
+                        ? "border-red-700/50 bg-red-900/20 text-red-400/80 hover:border-red-600 hover:bg-red-900/30"
                         : "border-rift-muted bg-rift-card text-gray-300 hover:border-gray-500 hover:bg-gray-800"
                 }`}
             >
@@ -116,6 +125,22 @@ function App() {
             return [...prev, cls];
         });
     }, []);
+
+    // Build a map of classes already tried for the current champion
+    const triedClasses = useMemo(() => {
+        const map = new Map<ChampionClass, "hit" | "miss">();
+        if (attemptsOnCurrent === 0) return map;
+        const recentEntries = history.slice(-attemptsOnCurrent);
+        for (const entry of recentEntries) {
+            for (const r of entry.guessResults) {
+                // If a class was hit in any attempt, mark it as hit (green wins over red)
+                if (map.get(r.cls) !== "hit") {
+                    map.set(r.cls, r.hit ? "hit" : "miss");
+                }
+            }
+        }
+        return map;
+    }, [history, attemptsOnCurrent]);
 
     const submitGuess = useCallback(() => {
         if (current == null) return;
@@ -237,6 +262,7 @@ function App() {
                                                 selectedClasses.length >=
                                                     MAX_SELECTION
                                             }
+                                            triedStatus={triedClasses.get(cls) ?? null}
                                             onToggle={() => toggleClass(cls)}
                                         />
                                     ))}
