@@ -17,30 +17,45 @@ function ClassButton({
     description,
     selected,
     disabled,
+    discarded,
     triedStatus,
     onToggle,
+    onDiscard,
 }: {
     label: string;
     description: string;
     selected: boolean;
     disabled: boolean;
+    discarded: boolean;
     triedStatus: "hit" | "miss" | null;
     onToggle: () => void;
+    onDiscard: () => void;
 }) {
     const triedHit = triedStatus === "hit";
     const triedMiss = triedStatus === "miss";
+
+    const handleContextMenu = useCallback(
+        (e: React.MouseEvent) => {
+            e.preventDefault();
+            onDiscard();
+        },
+        [onDiscard]
+    );
 
     return (
         <div className="group relative inline-block">
             <button
                 type="button"
                 onClick={onToggle}
+                onContextMenu={handleContextMenu}
                 disabled={disabled}
                 className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
                     selected
                         ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
                         : disabled
                         ? "cursor-not-allowed border-gray-700 bg-gray-800/50 text-gray-500"
+                        : discarded
+                        ? "border-gray-700/50 bg-gray-800/30 text-gray-600 line-through"
                         : triedHit
                         ? "border-emerald-700/50 bg-emerald-900/20 text-emerald-400/80 hover:border-emerald-600 hover:bg-emerald-900/30"
                         : triedMiss
@@ -232,18 +247,47 @@ function App() {
     const [history, setHistory] = useState<HistoryEntry[]>([]);
     const [missed, setMissed] = useState<MissedChampion[]>([]);
     const [finished, setFinished] = useState(false);
+    const [discardedClasses, setDiscardedClasses] = useState<
+        Set<ChampionClass>
+    >(new Set());
 
     const nextUpChampions = useMemo(
         () => queue.slice(queueIndex + 1, queueIndex + 1 + NEXT_UP_COUNT),
         [queue, queueIndex]
     );
 
-    const toggleClass = useCallback((cls: ChampionClass) => {
-        setSelectedClasses((prev) => {
-            if (prev.includes(cls)) return prev.filter((c) => c !== cls);
-            if (prev.length >= MAX_SELECTION) return prev;
-            return [...prev, cls];
+    const toggleClass = useCallback(
+        (cls: ChampionClass) => {
+            // Selecting a class removes it from discarded
+            setDiscardedClasses((prev) => {
+                if (prev.has(cls)) {
+                    const next = new Set(prev);
+                    next.delete(cls);
+                    return next;
+                }
+                return prev;
+            });
+            setSelectedClasses((prev) => {
+                if (prev.includes(cls)) return prev.filter((c) => c !== cls);
+                if (prev.length >= MAX_SELECTION) return prev;
+                return [...prev, cls];
+            });
+        },
+        []
+    );
+
+    const toggleDiscard = useCallback((cls: ChampionClass) => {
+        setDiscardedClasses((prev) => {
+            const next = new Set(prev);
+            if (next.has(cls)) {
+                next.delete(cls);
+            } else {
+                next.add(cls);
+            }
+            return next;
         });
+        // If the class was selected, deselect it
+        setSelectedClasses((prev) => prev.filter((c) => c !== cls));
     }, []);
 
     // Build a map of classes already tried for the current champion
@@ -282,6 +326,7 @@ function App() {
             }
             setTotalChampions((t) => t + 1);
             setAttemptsOnCurrent(0);
+            setDiscardedClasses(new Set());
             // Advance to next champion; reshuffle when we've gone through all
             if (queueIndex + 1 >= queue.length) {
                 setQueue(shuffleChampions(champions));
@@ -319,6 +364,7 @@ function App() {
         setHistory([]);
         setMissed([]);
         setFinished(false);
+        setDiscardedClasses(new Set());
     }, [champions]);
 
     if (finished) {
@@ -403,9 +449,23 @@ function App() {
                 </section>
 
                 <section className="rounded-2xl border border-gray-700 bg-rift-card/60 p-6">
-                    <p className="mb-4 text-sm text-rift-muted">
-                        Select up to 2 classes that apply. Then submit.
-                    </p>
+                    <div className="mb-4 flex items-center gap-2">
+                        <p className="text-sm text-rift-muted">
+                            Select up to 2 classes that apply. Then submit.
+                        </p>
+                        <div className="group relative inline-block">
+                            <span className="cursor-help text-sm text-rift-muted">
+                                &#9432;
+                            </span>
+                            <div
+                                role="tooltip"
+                                className="invisible absolute bottom-full left-1/2 z-50 mb-2 w-56 -translate-x-1/2 rounded-lg border border-gray-600 bg-gray-900 px-3 py-2 text-left text-sm font-normal text-gray-200 shadow-xl opacity-0 transition-opacity duration-150 group-hover:visible group-hover:opacity-100"
+                            >
+                                Right-click a class to cross it out and mark it
+                                as eliminated.
+                            </div>
+                        </div>
+                    </div>
                     <div className="flex flex-wrap gap-6">
                         {CLASS_GROUPS.map((group) => (
                             <div
@@ -433,8 +493,10 @@ function App() {
                                                 selectedClasses.length >=
                                                     MAX_SELECTION
                                             }
+                                            discarded={discardedClasses.has(cls)}
                                             triedStatus={triedClasses.get(cls) ?? null}
                                             onToggle={() => toggleClass(cls)}
+                                            onDiscard={() => toggleDiscard(cls)}
                                         />
                                     ))}
                                 </div>
