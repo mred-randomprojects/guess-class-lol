@@ -1,18 +1,17 @@
 /**
- * Fetches detailed spell data for every champion from Data Dragon and writes
+ * Fetches detailed spell data for every champion from Meraki Analytics
+ * (which pulls resolved data from the League wiki) and writes
  * src/data/championSpells.json. Run: npm run fetch-spells
  *
- * Spell icon URL:   https://ddragon.leagueoflegends.com/cdn/{version}/img/spell/{image}
- * Passive icon URL: https://ddragon.leagueoflegends.com/cdn/{version}/img/passive/{image}
+ * We still use Data Dragon for spell/passive icon URLs since they're
+ * the most reliable CDN for those.
+ *
+ * Meraki API: https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json
  */
+const MERAKI_ALL_URL =
+    "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json";
 const VERSIONS_URL = "https://ddragon.leagueoflegends.com/api/versions.json";
-const CHAMPION_LIST_URL = (v) =>
-    `https://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion.json`;
-const CHAMPION_DETAIL_URL = (v, id) =>
-    `https://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion/${id}.json`;
 const OUT_PATH = new URL("../src/data/championSpells.json", import.meta.url);
-
-const SPELL_KEYS = ["Q", "W", "E", "R"];
 
 async function fetchJson(url) {
     const res = await fetch(url);
@@ -20,73 +19,109 @@ async function fetchJson(url) {
     return res.json();
 }
 
-function extractSpell(spell, key) {
-    return {
-        key,
-        name: spell.name,
-        description: spell.description,
-        image: spell.image.full,
-        cooldown: spell.cooldown,
-        cost: spell.cost,
-        costType: spell.costType.trim(),
-        range: spell.range,
-        maxrank: spell.maxrank,
-    };
+/**
+ * Formats a single leveling entry into a human-readable string.
+ * e.g. "Magic Damage: 85/130/175/220/265 (+90% AP)"
+ */
+function formatLeveling(entry) {
+    const parts = [];
+    for (const mod of entry.modifiers) {
+        const unique = [...new Set(mod.values)];
+        const valStr =
+            unique.length === 1 ? `${unique[0]}` : mod.values.join("/");
+        const unit = mod.units[0] || "";
+        if (unit) {
+            parts.push(`${valStr}${unit}`);
+        } else {
+            parts.push(valStr);
+        }
+    }
+
+    // Join base values and scaling: "85/130/175/220/265 (+90% AP)"
+    const base = parts[0] || "";
+    const scalings = parts
+        .slice(1)
+        .map((s) => `(+${s})`)
+        .join(" ");
+    const value = scalings ? `${base} ${scalings}` : base;
+
+    return { attribute: entry.attribute, value };
 }
 
-function extractPassive(passive) {
+/**
+ * Formats cost/cooldown modifiers into a display string.
+ */
+function formatModifiers(obj) {
+    if (obj == null || obj.modifiers == null) return null;
+    const parts = [];
+    for (const mod of obj.modifiers) {
+        const unique = [...new Set(mod.values)];
+        const valStr =
+            unique.length === 1 ? `${unique[0]}` : mod.values.join("/");
+        const unit = mod.units[0] || "";
+        parts.push(`${valStr}${unit}`);
+    }
+    return parts.join(" ");
+}
+
+function extractAbility(key, abilityArray) {
+    // Meraki stores abilities as arrays (for transforms etc.), take the first
+    const ability = abilityArray[0];
+    if (ability == null) return null;
+
+    const effects = ability.effects.map((effect) => ({
+        description: effect.description,
+        scalings: effect.leveling.map(formatLeveling),
+    }));
+
     return {
-        name: passive.name,
-        description: passive.description,
-        image: passive.image.full,
+        key,
+        name: ability.name,
+        icon: ability.icon || null,
+        effects,
+        cooldown: formatModifiers(ability.cooldown),
+        cost: formatModifiers(ability.cost),
+        resource: ability.resource || null,
+        damageType: ability.damageType || null,
+        targeting: ability.targeting || null,
     };
 }
 
 async function main() {
+    console.log("Fetching Data Dragon version...");
     const versions = await fetchJson(VERSIONS_URL);
-    const version = versions[0];
-    console.log(`Using Data Dragon version ${version}`);
+    const ddVersion = versions[0];
+    console.log(`Data Dragon version: ${ddVersion}`);
 
-    // Get the list of all champion IDs
-    const listData = await fetchJson(CHAMPION_LIST_URL(version));
-    const championIds = Object.keys(listData.data);
-    console.log(`Found ${championIds.length} champions, fetching details...`);
+    console.log("Fetching Meraki champions data...");
+    const merakiData = await fetchJson(MERAKI_ALL_URL);
+    const championKeys = Object.keys(merakiData);
+    console.log(`Found ${championKeys.length} champions`);
 
+    const ABILITY_KEYS = ["P", "Q", "W", "E", "R"];
     const champions = {};
-    let done = 0;
 
-    // Fetch in batches of 10 to be polite to the CDN
-    const BATCH_SIZE = 10;
-    for (let i = 0; i < championIds.length; i += BATCH_SIZE) {
-        const batch = championIds.slice(i, i + BATCH_SIZE);
-        const results = await Promise.all(
-            batch.map(async (id) => {
-                const detail = await fetchJson(
-                    CHAMPION_DETAIL_URL(version, id)
-                );
-                const champ = detail.data[id];
-                return {
-                    id,
-                    passive: extractPassive(champ.passive),
-                    spells: champ.spells.map((s, idx) =>
-                        extractSpell(s, SPELL_KEYS[idx])
-                    ),
-                };
-            })
-        );
-        for (const r of results) {
-            champions[r.id] = {
-                passive: r.passive,
-                spells: r.spells,
-            };
+    for (const key of championKeys) {
+        const champ = merakiData[key];
+        const abilities = [];
+
+        for (const abilityKey of ABILITY_KEYS) {
+            const abilityArray = champ.abilities[abilityKey];
+            if (abilityArray == null) continue;
+            const extracted = extractAbility(abilityKey, abilityArray);
+            if (extracted != null) {
+                abilities.push(extracted);
+            }
         }
-        done += batch.length;
-        process.stdout.write(`\r  ${done}/${championIds.length} champions`);
+
+        champions[key] = {
+            name: champ.name,
+            abilities,
+        };
     }
-    console.log("");
 
     const output = {
-        version,
+        version: ddVersion,
         fetchedAt: new Date().toISOString(),
         champions,
     };

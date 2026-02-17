@@ -20,17 +20,21 @@ const RATING_POINTS: Record<Rating, number> = {
     no_idea: 0,
 };
 
-function formatCooldown(cd: number[]): string {
-    const unique = [...new Set(cd)];
-    if (unique.length === 1) return `${unique[0]}s`;
-    return cd.join(" / ") + "s";
+/** Color-code damage type labels */
+function damageTypeColor(damageType: string | null): string {
+    if (damageType == null) return "text-gray-400";
+    if (damageType.includes("MAGIC")) return "text-blue-400";
+    if (damageType.includes("PHYSICAL")) return "text-red-400";
+    if (damageType.includes("TRUE")) return "text-white";
+    return "text-gray-400";
 }
 
-function formatCost(cost: number[], costType: string): string {
-    if (costType === "No Cost" || costType === "") return "No cost";
-    const unique = [...new Set(cost)];
-    const values = unique.length === 1 ? `${unique[0]}` : cost.join(" / ");
-    return `${values} ${costType}`;
+function damageTypeLabel(damageType: string | null): string | null {
+    if (damageType == null) return null;
+    if (damageType.includes("MAGIC")) return "Magic damage";
+    if (damageType.includes("PHYSICAL")) return "Physical damage";
+    if (damageType.includes("TRUE")) return "True damage";
+    return null;
 }
 
 // --- Results screen ---
@@ -359,17 +363,66 @@ function SkillsTrainer() {
                             </button>
                         ) : (
                             <div className="w-full space-y-4">
-                                {/* Ability name */}
-                                <h3 className="text-center text-xl font-bold text-white">
-                                    {currentAbility.name}
-                                </h3>
+                                {/* Ability name + damage type */}
+                                <div className="flex flex-col items-center gap-1">
+                                    <h3 className="text-xl font-bold text-white">
+                                        {currentAbility.name}
+                                    </h3>
+                                    {damageTypeLabel(
+                                        currentAbility.damageType
+                                    ) != null && (
+                                        <span
+                                            className={`text-xs font-medium ${damageTypeColor(currentAbility.damageType)}`}
+                                        >
+                                            {damageTypeLabel(
+                                                currentAbility.damageType
+                                            )}
+                                        </span>
+                                    )}
+                                </div>
 
-                                {/* Description */}
-                                <p className="rounded-xl bg-gray-800/60 p-4 text-sm leading-relaxed text-gray-200">
-                                    {currentAbility.description}
-                                </p>
+                                {/* Effects with scalings */}
+                                <div className="space-y-3">
+                                    {currentAbility.effects.map(
+                                        (effect, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="rounded-xl bg-gray-800/60 p-4"
+                                            >
+                                                <p className="text-sm leading-relaxed text-gray-200">
+                                                    {effect.description}
+                                                </p>
+                                                {effect.scalings.length >
+                                                    0 && (
+                                                    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                                                        {effect.scalings.map(
+                                                            (s, si) => (
+                                                                <span
+                                                                    key={si}
+                                                                    className="text-xs"
+                                                                >
+                                                                    <span className="font-semibold text-rift-muted">
+                                                                        {
+                                                                            s.attribute
+                                                                        }
+                                                                        :
+                                                                    </span>{" "}
+                                                                    <span className={damageTypeColor(currentAbility.damageType)}>
+                                                                        {
+                                                                            s.value
+                                                                        }
+                                                                    </span>
+                                                                </span>
+                                                            )
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    )}
+                                </div>
 
-                                {/* Stats */}
+                                {/* Cooldown + Cost stats */}
                                 {(currentAbility.cooldown != null ||
                                     currentAbility.cost != null) && (
                                     <div className="flex flex-wrap gap-4 text-sm">
@@ -379,33 +432,19 @@ function SkillsTrainer() {
                                                     Cooldown
                                                 </span>
                                                 <p className="text-blue-400">
-                                                    {formatCooldown(
-                                                        currentAbility.cooldown
-                                                    )}
+                                                    {currentAbility.cooldown}s
                                                 </p>
                                             </div>
                                         )}
-                                        {currentAbility.cost != null &&
-                                            currentAbility.costType != null && (
-                                                <div className="rounded-lg border border-gray-700 bg-gray-800/40 px-4 py-2">
-                                                    <span className="text-xs font-semibold uppercase text-rift-muted">
-                                                        Cost
-                                                    </span>
-                                                    <p className="text-blue-400">
-                                                        {formatCost(
-                                                            currentAbility.cost,
-                                                            currentAbility.costType
-                                                        )}
-                                                    </p>
-                                                </div>
-                                            )}
-                                        {currentAbility.maxrank != null && (
+                                        {currentAbility.cost != null && (
                                             <div className="rounded-lg border border-gray-700 bg-gray-800/40 px-4 py-2">
                                                 <span className="text-xs font-semibold uppercase text-rift-muted">
-                                                    Max rank
+                                                    Cost
                                                 </span>
-                                                <p className="text-gray-300">
-                                                    {currentAbility.maxrank}
+                                                <p className="text-blue-400">
+                                                    {currentAbility.cost}{" "}
+                                                    {currentAbility.resource ??
+                                                        ""}
                                                 </p>
                                             </div>
                                         )}

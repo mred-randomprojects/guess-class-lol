@@ -3,41 +3,57 @@ import spellsData from "./championSpells.json";
 import type { Champion } from "../types";
 
 const version: string = spellsData.version;
-const championsSpells = spellsData.champions as Record<string, RawChampionSpells>;
+const championsSpells = spellsData.champions as Record<
+    string,
+    RawChampionSpells
+>;
 
-interface RawSpell {
-    key: string;
-    name: string;
-    description: string;
-    image: string;
-    cooldown: number[];
-    cost: number[];
-    costType: string;
-    range: number[];
-    maxrank: number;
+interface RawScaling {
+    attribute: string;
+    value: string;
 }
 
-interface RawPassive {
-    name: string;
+interface RawEffect {
     description: string;
-    image: string;
+    scalings: RawScaling[];
+}
+
+interface RawAbility {
+    key: string;
+    name: string;
+    icon: string | null;
+    effects: RawEffect[];
+    cooldown: string | null;
+    cost: string | null;
+    resource: string | null;
+    damageType: string | null;
+    targeting: string | null;
 }
 
 interface RawChampionSpells {
-    passive: RawPassive;
-    spells: RawSpell[];
+    name: string;
+    abilities: RawAbility[];
+}
+
+export interface AbilityScaling {
+    attribute: string;
+    value: string;
+}
+
+export interface AbilityEffect {
+    description: string;
+    scalings: readonly AbilityScaling[];
 }
 
 export interface SpellInfo {
-    key: "Passive" | "Q" | "W" | "E" | "R";
+    key: "P" | "Q" | "W" | "E" | "R";
     name: string;
-    description: string;
     imageUrl: string;
-    cooldown: number[] | null;
-    cost: number[] | null;
-    costType: string | null;
-    range: number[] | null;
-    maxrank: number | null;
+    effects: readonly AbilityEffect[];
+    cooldown: string | null;
+    cost: string | null;
+    resource: string | null;
+    damageType: string | null;
 }
 
 export interface ChampionSpellSet {
@@ -45,63 +61,50 @@ export interface ChampionSpellSet {
     abilities: readonly SpellInfo[];
 }
 
-function stripHtmlTags(text: string): string {
-    return text.replace(/<[^>]*>/g, "");
+type AbilityKey = "P" | "Q" | "W" | "E" | "R";
+
+function isAbilityKey(key: string): key is AbilityKey {
+    return key === "P" || key === "Q" || key === "W" || key === "E" || key === "R";
 }
 
-function buildSpellImageUrl(image: string): string {
-    return `https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image}`;
-}
-
-function buildPassiveImageUrl(image: string): string {
-    return `https://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${image}`;
-}
-
-function buildAbilities(data: RawChampionSpells): SpellInfo[] {
-    const abilities: SpellInfo[] = [];
-
-    abilities.push({
-        key: "Passive",
-        name: data.passive.name,
-        description: stripHtmlTags(data.passive.description),
-        imageUrl: buildPassiveImageUrl(data.passive.image),
-        cooldown: null,
-        cost: null,
-        costType: null,
-        range: null,
-        maxrank: null,
-    });
-
-    const keys = ["Q", "W", "E", "R"] as const;
-    for (let i = 0; i < data.spells.length; i++) {
-        const s = data.spells[i];
-        abilities.push({
-            key: keys[i],
-            name: s.name,
-            description: stripHtmlTags(s.description),
-            imageUrl: buildSpellImageUrl(s.image),
-            cooldown: s.cooldown,
-            cost: s.cost,
-            costType: s.costType,
-            range: s.range,
-            maxrank: s.maxrank,
-        });
+function buildSpellImageUrl(champion: Champion, key: AbilityKey): string {
+    if (key === "P") {
+        return `https://cdn.communitydragon.org/latest/champion/${champion.id}/ability-icon/p`;
     }
+    return `https://cdn.communitydragon.org/latest/champion/${champion.id}/ability-icon/${key.toLowerCase()}`;
+}
 
-    return abilities;
+function buildAbilities(
+    data: RawChampionSpells,
+    champion: Champion
+): SpellInfo[] {
+    return data.abilities
+        .filter((a) => isAbilityKey(a.key))
+        .map((a) => ({
+            key: a.key as AbilityKey,
+            name: a.name,
+            imageUrl: a.icon ?? buildSpellImageUrl(champion, a.key as AbilityKey),
+            effects: a.effects,
+            cooldown: a.cooldown,
+            cost: a.cost,
+            resource: a.resource,
+            damageType: a.damageType,
+        }));
 }
 
 export function useSpells(): {
     getSpellSet: (champion: Champion) => ChampionSpellSet | null;
+    version: string;
 } {
     return useMemo(
         () => ({
+            version,
             getSpellSet(champion: Champion): ChampionSpellSet | null {
                 const data = championsSpells[champion.id];
                 if (data == null) return null;
                 return {
                     champion,
-                    abilities: buildAbilities(data),
+                    abilities: buildAbilities(data, champion),
                 };
             },
         }),
