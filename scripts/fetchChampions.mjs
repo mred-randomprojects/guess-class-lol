@@ -24,7 +24,7 @@ async function main() {
         name: c.name,
         image: c.image.full,
     }));
-    const output = { version, champions };
+    const output = { version, fetchedAt: new Date().toISOString(), champions };
     await import("fs").then((fs) =>
         fs.promises.writeFile(
             new URL(OUT_PATH),

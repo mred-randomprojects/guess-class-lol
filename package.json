@@ -8,7 +8,9 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "fetch-champions": "node scripts/fetchChampions.mjs"
+        "fetch-champions": "node scripts/fetchChampions.mjs",
+        "fetch-spells": "node scripts/fetchChampionSpells.mjs",
+        "fetch-data": "node scripts/fetchChampions.mjs && node scripts/fetchChampionSpells.mjs"
     },
     "dependencies": {
         "react": "^18.3.1",
