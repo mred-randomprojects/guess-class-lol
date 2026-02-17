@@ -1,9 +1,11 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useChampions, getImageUrl } from "./data/useChampions";
 import { useSpells } from "./data/useSpells";
 import type { SpellInfo } from "./data/useSpells";
-import type { Champion } from "./types";
+import type { Champion, GameChampion } from "./types";
+import type { ChampionClass } from "./data/classes";
+import { CHAMPION_CLASSES, CLASS_GROUPS } from "./data/classes";
 import { shuffleChampions } from "./gameLogic";
 
 type Rating = "nailed" | "partial" | "no_idea";
@@ -154,12 +156,21 @@ function SkillsResults({
 
 // --- Main game ---
 
+const ALL_ABILITY_KEYS: readonly AbilityKey[] = ["P", "Q", "W", "E", "R"];
+type AbilityKey = "P" | "Q" | "W" | "E" | "R";
+
 function SkillsTrainer() {
-    const { champions } = useChampions();
+    const { champions, getGameChampion } = useChampions();
     const { getSpellSet } = useSpells();
 
     const [gameMode, setGameMode] = useState<GameMode>("per-champion");
     const [showIcon, setShowIcon] = useState(true);
+    const [enabledKeys, setEnabledKeys] = useState<Set<AbilityKey>>(
+        () => new Set(ALL_ABILITY_KEYS)
+    );
+    const [enabledClasses, setEnabledClasses] = useState<Set<ChampionClass>>(
+        () => new Set(CHAMPION_CLASSES)
+    );
     const [gameStarted, setGameStarted] = useState(false);
     const [finished, setFinished] = useState(false);
     const [revealed, setRevealed] = useState(false);
@@ -174,17 +185,65 @@ function SkillsTrainer() {
 
     const totalAbilities = abilityQueue.length;
 
+    const toggleKey = useCallback((key: AbilityKey) => {
+        setEnabledKeys((prev) => {
+            const next = new Set(prev);
+            if (next.has(key)) {
+                next.delete(key);
+            } else {
+                next.add(key);
+            }
+            return next;
+        });
+    }, []);
+
+    const toggleClass = useCallback((cls: ChampionClass) => {
+        setEnabledClasses((prev) => {
+            const next = new Set(prev);
+            if (next.has(cls)) {
+                next.delete(cls);
+            } else {
+                next.add(cls);
+            }
+            return next;
+        });
+    }, []);
+
+    const selectAllClasses = useCallback(() => {
+        setEnabledClasses(new Set(CHAMPION_CLASSES));
+    }, []);
+
+    const deselectAllClasses = useCallback(() => {
+        setEnabledClasses(new Set());
+    }, []);
+
+    // Champions filtered by enabled classes
+    const filteredChampions = useMemo(() => {
+        if (enabledClasses.size === CHAMPION_CLASSES.length) return champions;
+        return champions.filter((c) => {
+            const gc: GameChampion = getGameChampion(c);
+            return gc.classes.some((cls) => enabledClasses.has(cls));
+        });
+    }, [champions, enabledClasses, getGameChampion]);
+
+    // Preview count of abilities in the pool
+    const poolSize = useMemo(() => {
+        return filteredChampions.length * enabledKeys.size;
+    }, [filteredChampions, enabledKeys]);
+
     /** Build a flat list of all (champion, ability) pairs */
     const buildAbilityQueue = useCallback(
         (mode: GameMode): QueueItem[] => {
-            const shuffled = shuffleChampions(champions);
+            const shuffled = shuffleChampions(filteredChampions);
             const items: QueueItem[] = [];
 
             for (const champ of shuffled) {
                 const spellSet = getSpellSet(champ);
                 if (spellSet == null) continue;
                 for (const ability of spellSet.abilities) {
-                    items.push({ champion: champ, ability });
+                    if (enabledKeys.has(ability.key)) {
+                        items.push({ champion: champ, ability });
+                    }
                 }
             }
 
@@ -199,10 +258,13 @@ function SkillsTrainer() {
 
             return items;
         },
-        [champions, getSpellSet]
+        [filteredChampions, getSpellSet, enabledKeys]
     );
 
+    const canLaunch = enabledKeys.size > 0 && enabledClasses.size > 0;
+
     const launchGame = useCallback(() => {
+        if (!canLaunch) return;
         const items = buildAbilityQueue(gameMode);
         setAbilityQueue(items);
         setQueueIndex(0);
@@ -210,7 +272,7 @@ function SkillsTrainer() {
         setResults([]);
         setFinished(false);
         setGameStarted(true);
-    }, [gameMode, buildAbilityQueue]);
+    }, [gameMode, buildAbilityQueue, canLaunch]);
 
     const submitRating = useCallback(
         (rating: Rating) => {
@@ -276,17 +338,6 @@ function SkillsTrainer() {
                             icons. Try to recall what the ability does, then
                             reveal the answer and rate yourself.
                         </p>
-                        <p className="text-lg text-gray-300">
-                            <span className="font-bold text-rift-gold">
-                                {champions.length}
-                            </span>{" "}
-                            champions &middot;{" "}
-                            <span className="font-bold text-rift-gold">
-                                {champions.length * 5}
-                            </span>{" "}
-                            abilities
-                        </p>
-
                         {/* Mode selector */}
                         <div className="flex gap-3">
                             <button
@@ -338,10 +389,100 @@ function SkillsTrainer() {
                                 : "Hard mode — no icon hint, just the ability key (P/Q/W/E/R)."}
                         </p>
 
+                        {/* Ability key filter */}
+                        <div className="w-full max-w-md space-y-2">
+                            <p className="text-center text-sm font-semibold text-gray-300">
+                                Ability slots
+                            </p>
+                            <div className="flex justify-center gap-2">
+                                {ALL_ABILITY_KEYS.map((key) => (
+                                    <button
+                                        key={key}
+                                        type="button"
+                                        onClick={() => toggleKey(key)}
+                                        className={`h-10 w-10 rounded-lg border-2 text-sm font-bold transition-colors ${
+                                            enabledKeys.has(key)
+                                                ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
+                                                : "border-gray-600 text-gray-500 hover:border-gray-500"
+                                        }`}
+                                    >
+                                        {key}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Champion class filter */}
+                        <div className="w-full max-w-md space-y-2">
+                            <div className="flex items-center justify-between">
+                                <p className="text-sm font-semibold text-gray-300">
+                                    Champion classes
+                                </p>
+                                <div className="flex gap-2 text-xs">
+                                    <button
+                                        type="button"
+                                        onClick={selectAllClasses}
+                                        className="text-rift-gold hover:underline"
+                                    >
+                                        All
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={deselectAllClasses}
+                                        className="text-gray-400 hover:underline"
+                                    >
+                                        None
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="space-y-1">
+                                {CLASS_GROUPS.map((group) => (
+                                    <div
+                                        key={group.parent}
+                                        className="flex flex-wrap gap-1.5"
+                                    >
+                                        {group.subclasses.map((cls) => (
+                                            <button
+                                                key={cls}
+                                                type="button"
+                                                onClick={() =>
+                                                    toggleClass(cls)
+                                                }
+                                                className={`rounded-md border px-2.5 py-1 text-xs font-medium transition-colors ${
+                                                    enabledClasses.has(cls)
+                                                        ? "border-rift-gold/50 bg-rift-gold/15 text-rift-gold"
+                                                        : "border-gray-700 text-gray-500 hover:border-gray-600"
+                                                }`}
+                                            >
+                                                {cls}
+                                            </button>
+                                        ))}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Pool size preview */}
+                        <p className="text-sm text-gray-300">
+                            <span className="font-bold text-rift-gold">
+                                {filteredChampions.length}
+                            </span>{" "}
+                            champions &middot;{" "}
+                            <span className="font-bold text-rift-gold">
+                                {poolSize}
+                            </span>{" "}
+                            abilities in pool
+                        </p>
+
                         <button
                             type="button"
                             onClick={launchGame}
-                            className="rounded-lg bg-rift-gold px-8 py-3 text-lg font-semibold text-rift-dark hover:bg-rift-gold/90"
+                            disabled={!canLaunch}
+                            className={`rounded-lg px-8 py-3 text-lg font-semibold ${
+                                canLaunch
+                                    ? "bg-rift-gold text-rift-dark hover:bg-rift-gold/90"
+                                    : "cursor-not-allowed bg-gray-700 text-gray-500"
+                            }`}
                         >
                             Start
                         </button>
