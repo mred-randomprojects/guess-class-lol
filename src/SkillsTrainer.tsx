@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useChampions, getImageUrl } from "./data/useChampions";
 import { useSpells } from "./data/useSpells";
@@ -7,11 +7,17 @@ import type { Champion } from "./types";
 import { shuffleChampions } from "./gameLogic";
 
 type Rating = "nailed" | "partial" | "no_idea";
+type GameMode = "per-champion" | "per-ability";
 
 interface AbilityResult {
     champion: Champion;
     ability: SpellInfo;
     rating: Rating;
+}
+
+interface QueueItem {
+    champion: Champion;
+    ability: SpellInfo;
 }
 
 const RATING_POINTS: Record<Rating, number> = {
@@ -152,63 +158,80 @@ function SkillsTrainer() {
     const { champions } = useChampions();
     const { getSpellSet } = useSpells();
 
+    const [gameMode, setGameMode] = useState<GameMode>("per-champion");
     const [gameStarted, setGameStarted] = useState(false);
     const [finished, setFinished] = useState(false);
-    const [queue, setQueue] = useState<Champion[]>([]);
-    const [champIndex, setChampIndex] = useState(0);
-    const [abilityIndex, setAbilityIndex] = useState(0);
     const [revealed, setRevealed] = useState(false);
     const [results, setResults] = useState<AbilityResult[]>([]);
 
-    const currentSpellSet = useMemo(() => {
-        if (queue.length === 0) return null;
-        return getSpellSet(queue[champIndex]);
-    }, [queue, champIndex, getSpellSet]);
+    // Flat queue of individual abilities (used in both modes)
+    const [abilityQueue, setAbilityQueue] = useState<QueueItem[]>([]);
+    const [queueIndex, setQueueIndex] = useState(0);
 
-    const currentAbility =
-        currentSpellSet != null
-            ? currentSpellSet.abilities[abilityIndex] ?? null
-            : null;
+    const currentItem: QueueItem | null =
+        abilityQueue.length > 0 ? abilityQueue[queueIndex] ?? null : null;
 
-    const totalAbilities = queue.length * 5; // passive + Q W E R per champ
-    const completedAbilities = champIndex * 5 + abilityIndex;
+    const totalAbilities = abilityQueue.length;
+
+    /** Build a flat list of all (champion, ability) pairs */
+    const buildAbilityQueue = useCallback(
+        (mode: GameMode): QueueItem[] => {
+            const shuffled = shuffleChampions(champions);
+            const items: QueueItem[] = [];
+
+            for (const champ of shuffled) {
+                const spellSet = getSpellSet(champ);
+                if (spellSet == null) continue;
+                for (const ability of spellSet.abilities) {
+                    items.push({ champion: champ, ability });
+                }
+            }
+
+            // In per-ability mode, shuffle all items so abilities from
+            // different champions are interleaved
+            if (mode === "per-ability") {
+                for (let i = items.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [items[i], items[j]] = [items[j], items[i]];
+                }
+            }
+
+            return items;
+        },
+        [champions, getSpellSet]
+    );
 
     const launchGame = useCallback(() => {
-        const shuffled = shuffleChampions(champions);
-        setQueue(shuffled);
-        setChampIndex(0);
-        setAbilityIndex(0);
+        const items = buildAbilityQueue(gameMode);
+        setAbilityQueue(items);
+        setQueueIndex(0);
         setRevealed(false);
         setResults([]);
         setFinished(false);
         setGameStarted(true);
-    }, [champions]);
+    }, [gameMode, buildAbilityQueue]);
 
     const submitRating = useCallback(
         (rating: Rating) => {
-            if (currentSpellSet == null || currentAbility == null) return;
+            if (currentItem == null) return;
 
             setResults((prev) => [
                 ...prev,
                 {
-                    champion: currentSpellSet.champion,
-                    ability: currentAbility,
+                    champion: currentItem.champion,
+                    ability: currentItem.ability,
                     rating,
                 },
             ]);
             setRevealed(false);
 
-            // Advance to next ability or next champion
-            if (abilityIndex + 1 < (currentSpellSet.abilities.length)) {
-                setAbilityIndex((i) => i + 1);
-            } else if (champIndex + 1 < queue.length) {
-                setChampIndex((i) => i + 1);
-                setAbilityIndex(0);
+            if (queueIndex + 1 < abilityQueue.length) {
+                setQueueIndex((i) => i + 1);
             } else {
                 setFinished(true);
             }
         },
-        [currentSpellSet, currentAbility, abilityIndex, champIndex, queue.length]
+        [currentItem, queueIndex, abilityQueue.length]
     );
 
     const finishEarly = useCallback(() => {
@@ -262,6 +285,38 @@ function SkillsTrainer() {
                             </span>{" "}
                             abilities
                         </p>
+
+                        {/* Mode selector */}
+                        <div className="flex gap-3">
+                            <button
+                                type="button"
+                                onClick={() => setGameMode("per-champion")}
+                                className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                                    gameMode === "per-champion"
+                                        ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
+                                        : "border-gray-600 text-gray-400 hover:border-gray-500 hover:text-gray-300"
+                                }`}
+                            >
+                                All abilities per champion
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setGameMode("per-ability")}
+                                className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                                    gameMode === "per-ability"
+                                        ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
+                                        : "border-gray-600 text-gray-400 hover:border-gray-500 hover:text-gray-300"
+                                }`}
+                            >
+                                Random ability each time
+                            </button>
+                        </div>
+                        <p className="text-xs text-rift-muted">
+                            {gameMode === "per-champion"
+                                ? "Go through P → Q → W → E → R for each champion before moving on."
+                                : "Jump between random champions — one ability at a time."}
+                        </p>
+
                         <button
                             type="button"
                             onClick={launchGame}
@@ -276,13 +331,15 @@ function SkillsTrainer() {
     }
 
     // --- Game loop ---
-    if (currentSpellSet == null || currentAbility == null) {
+    if (currentItem == null) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-rift-dark p-8">
                 <p className="text-rift-muted">No spell data available.</p>
             </div>
         );
     }
+
+    const { champion, ability } = currentItem;
 
     return (
         <div className="min-h-screen bg-rift-dark font-body text-gray-100">
@@ -293,8 +350,7 @@ function SkillsTrainer() {
                     </h1>
                     <div className="flex items-center gap-4">
                         <span className="text-sm text-rift-muted">
-                            {completedAbilities + 1} / {totalAbilities}{" "}
-                            abilities
+                            {queueIndex + 1} / {totalAbilities} abilities
                         </span>
                         <button
                             type="button"
@@ -311,18 +367,14 @@ function SkillsTrainer() {
                 {/* Champion info */}
                 <section className="flex items-center gap-4 rounded-2xl border border-gray-700 bg-rift-card/60 p-6">
                     <img
-                        src={getImageUrl(currentSpellSet.champion)}
-                        alt={currentSpellSet.champion.name}
+                        src={getImageUrl(champion)}
+                        alt={champion.name}
                         className="h-16 w-16 rounded-xl object-cover ring-2 ring-rift-gold/50"
                     />
                     <div>
                         <span className="text-xl font-bold text-white">
-                            {currentSpellSet.champion.name}
+                            {champion.name}
                         </span>
-                        <p className="text-sm text-rift-muted">
-                            Ability {abilityIndex + 1} of{" "}
-                            {currentSpellSet.abilities.length}
-                        </p>
                     </div>
                 </section>
 
@@ -333,16 +385,16 @@ function SkillsTrainer() {
                         <div className="flex flex-col items-center gap-3">
                             <div className="relative">
                                 <img
-                                    src={currentAbility.imageUrl}
+                                    src={ability.imageUrl}
                                     alt={
                                         revealed
-                                            ? currentAbility.name
+                                            ? ability.name
                                             : "Mystery ability"
                                     }
                                     className="h-24 w-24 rounded-xl object-cover ring-2 ring-gray-600"
                                 />
                                 <span className="absolute -right-2 -top-2 rounded-full bg-rift-gold px-2.5 py-0.5 text-xs font-bold text-rift-dark">
-                                    {currentAbility.key}
+                                    {ability.key}
                                 </span>
                             </div>
                             {!revealed && (
@@ -366,16 +418,16 @@ function SkillsTrainer() {
                                 {/* Ability name + damage type */}
                                 <div className="flex flex-col items-center gap-1">
                                     <h3 className="text-xl font-bold text-white">
-                                        {currentAbility.name}
+                                        {ability.name}
                                     </h3>
                                     {damageTypeLabel(
-                                        currentAbility.damageType
+                                        ability.damageType
                                     ) != null && (
                                         <span
-                                            className={`text-xs font-medium ${damageTypeColor(currentAbility.damageType)}`}
+                                            className={`text-xs font-medium ${damageTypeColor(ability.damageType)}`}
                                         >
                                             {damageTypeLabel(
-                                                currentAbility.damageType
+                                                ability.damageType
                                             )}
                                         </span>
                                     )}
@@ -383,68 +435,66 @@ function SkillsTrainer() {
 
                                 {/* Effects with scalings */}
                                 <div className="space-y-3">
-                                    {currentAbility.effects.map(
-                                        (effect, idx) => (
-                                            <div
-                                                key={idx}
-                                                className="rounded-xl bg-gray-800/60 p-4"
-                                            >
-                                                <p className="text-sm leading-relaxed text-gray-200">
-                                                    {effect.description}
-                                                </p>
-                                                {effect.scalings.length >
-                                                    0 && (
-                                                    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                                                        {effect.scalings.map(
-                                                            (s, si) => (
+                                    {ability.effects.map((effect, idx) => (
+                                        <div
+                                            key={idx}
+                                            className="rounded-xl bg-gray-800/60 p-4"
+                                        >
+                                            <p className="text-sm leading-relaxed text-gray-200">
+                                                {effect.description}
+                                            </p>
+                                            {effect.scalings.length > 0 && (
+                                                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                                                    {effect.scalings.map(
+                                                        (s, si) => (
+                                                            <span
+                                                                key={si}
+                                                                className="text-xs"
+                                                            >
+                                                                <span className="font-semibold text-rift-muted">
+                                                                    {
+                                                                        s.attribute
+                                                                    }
+                                                                    :
+                                                                </span>{" "}
                                                                 <span
-                                                                    key={si}
-                                                                    className="text-xs"
+                                                                    className={damageTypeColor(
+                                                                        ability.damageType
+                                                                    )}
                                                                 >
-                                                                    <span className="font-semibold text-rift-muted">
-                                                                        {
-                                                                            s.attribute
-                                                                        }
-                                                                        :
-                                                                    </span>{" "}
-                                                                    <span className={damageTypeColor(currentAbility.damageType)}>
-                                                                        {
-                                                                            s.value
-                                                                        }
-                                                                    </span>
+                                                                    {s.value}
                                                                 </span>
-                                                            )
-                                                        )}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )
-                                    )}
+                                                            </span>
+                                                        )
+                                                    )}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
                                 </div>
 
                                 {/* Cooldown + Cost stats */}
-                                {(currentAbility.cooldown != null ||
-                                    currentAbility.cost != null) && (
+                                {(ability.cooldown != null ||
+                                    ability.cost != null) && (
                                     <div className="flex flex-wrap gap-4 text-sm">
-                                        {currentAbility.cooldown != null && (
+                                        {ability.cooldown != null && (
                                             <div className="rounded-lg border border-gray-700 bg-gray-800/40 px-4 py-2">
                                                 <span className="text-xs font-semibold uppercase text-rift-muted">
                                                     Cooldown
                                                 </span>
                                                 <p className="text-blue-400">
-                                                    {currentAbility.cooldown}s
+                                                    {ability.cooldown}s
                                                 </p>
                                             </div>
                                         )}
-                                        {currentAbility.cost != null && (
+                                        {ability.cost != null && (
                                             <div className="rounded-lg border border-gray-700 bg-gray-800/40 px-4 py-2">
                                                 <span className="text-xs font-semibold uppercase text-rift-muted">
                                                     Cost
                                                 </span>
                                                 <p className="text-blue-400">
-                                                    {currentAbility.cost}{" "}
-                                                    {currentAbility.resource ??
-                                                        ""}
+                                                    {ability.cost}{" "}
+                                                    {ability.resource ?? ""}
                                                 </p>
                                             </div>
                                         )}
