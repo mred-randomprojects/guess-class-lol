@@ -159,6 +159,7 @@ function SkillsTrainer() {
     const { getSpellSet } = useSpells();
 
     const [gameMode, setGameMode] = useState<GameMode>("per-champion");
+    const [showIcon, setShowIcon] = useState(true);
     const [gameStarted, setGameStarted] = useState(false);
     const [finished, setFinished] = useState(false);
     const [revealed, setRevealed] = useState(false);
@@ -317,6 +318,26 @@ function SkillsTrainer() {
                                 : "Jump between random champions — one ability at a time."}
                         </p>
 
+                        {/* Show icon toggle */}
+                        <button
+                            type="button"
+                            onClick={() => setShowIcon((v) => !v)}
+                            className={`rounded-lg border-2 px-4 py-2 text-sm font-medium transition-colors ${
+                                showIcon
+                                    ? "border-rift-gold bg-rift-gold/20 text-rift-gold"
+                                    : "border-gray-600 text-gray-400 hover:border-gray-500 hover:text-gray-300"
+                            }`}
+                        >
+                            {showIcon
+                                ? "Ability icon: shown"
+                                : "Ability icon: hidden"}
+                        </button>
+                        <p className="text-xs text-rift-muted">
+                            {showIcon
+                                ? "You'll see the ability icon before revealing."
+                                : "Hard mode — no icon hint, just the ability key (P/Q/W/E/R)."}
+                        </p>
+
                         <button
                             type="button"
                             onClick={launchGame}
@@ -384,15 +405,21 @@ function SkillsTrainer() {
                         {/* Icon + key badge */}
                         <div className="flex flex-col items-center gap-3">
                             <div className="relative">
-                                <img
-                                    src={ability.imageUrl}
-                                    alt={
-                                        revealed
-                                            ? ability.name
-                                            : "Mystery ability"
-                                    }
-                                    className="h-24 w-24 rounded-xl object-cover ring-2 ring-gray-600"
-                                />
+                                {showIcon || revealed ? (
+                                    <img
+                                        src={ability.imageUrl}
+                                        alt={
+                                            revealed
+                                                ? ability.name
+                                                : "Mystery ability"
+                                        }
+                                        className="h-24 w-24 rounded-xl object-cover ring-2 ring-gray-600"
+                                    />
+                                ) : (
+                                    <div className="flex h-24 w-24 items-center justify-center rounded-xl bg-gray-800 text-3xl font-bold text-gray-500 ring-2 ring-gray-600">
+                                        ?
+                                    </div>
+                                )}
                                 <span className="absolute -right-2 -top-2 rounded-full bg-rift-gold px-2.5 py-0.5 text-xs font-bold text-rift-dark">
                                     {ability.key}
                                 </span>
