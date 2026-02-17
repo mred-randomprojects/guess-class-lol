@@ -11,6 +11,10 @@
 const MERAKI_ALL_URL =
     "https://cdn.merakianalytics.com/riot/lol/resources/latest/en-US/champions.json";
 const VERSIONS_URL = "https://ddragon.leagueoflegends.com/api/versions.json";
+const CHAMPION_LIST_URL = (v) =>
+    `https://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion.json`;
+const CHAMPION_DETAIL_URL = (v, id) =>
+    `https://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion/${id}.json`;
 const OUT_PATH = new URL("../src/data/championSpells.json", import.meta.url);
 
 async function fetchJson(url) {
@@ -64,7 +68,7 @@ function formatModifiers(obj) {
     return parts.join(" ");
 }
 
-function extractAbility(key, abilityArray) {
+function extractAbility(key, abilityArray, ddImage) {
     // Meraki stores abilities as arrays (for transforms etc.), take the first
     const ability = abilityArray[0];
     if (ability == null) return null;
@@ -77,7 +81,7 @@ function extractAbility(key, abilityArray) {
     return {
         key,
         name: ability.name,
-        icon: ability.icon || null,
+        image: ddImage || null,
         effects,
         cooldown: formatModifiers(ability.cooldown),
         cost: formatModifiers(ability.cost),
@@ -98,17 +102,67 @@ async function main() {
     const championKeys = Object.keys(merakiData);
     console.log(`Found ${championKeys.length} champions`);
 
+    // Fetch DDragon data for reliable spell icon filenames
+    console.log("Fetching Data Dragon champion list...");
+    const listData = await fetchJson(CHAMPION_LIST_URL(ddVersion));
+    const ddChampionIds = Object.keys(listData.data);
+    console.log(
+        `Fetching Data Dragon details for ${ddChampionIds.length} champions...`
+    );
+
+    // Map champion key → { passive image, spell images [Q,W,E,R] }
+    const ddImages = {};
+    const BATCH_SIZE = 10;
+    let done = 0;
+    for (let i = 0; i < ddChampionIds.length; i += BATCH_SIZE) {
+        const batch = ddChampionIds.slice(i, i + BATCH_SIZE);
+        const results = await Promise.all(
+            batch.map(async (id) => {
+                const detail = await fetchJson(
+                    CHAMPION_DETAIL_URL(ddVersion, id)
+                );
+                const c = detail.data[id];
+                return {
+                    id,
+                    passiveImage: c.passive.image.full,
+                    spellImages: c.spells.map((s) => s.image.full),
+                };
+            })
+        );
+        for (const r of results) {
+            ddImages[r.id] = r;
+        }
+        done += batch.length;
+        process.stdout.write(
+            `\r  ${done}/${ddChampionIds.length} DDragon details`
+        );
+    }
+    console.log("");
+
     const ABILITY_KEYS = ["P", "Q", "W", "E", "R"];
+    const SPELL_INDEX = { Q: 0, W: 1, E: 2, R: 3 };
     const champions = {};
 
     for (const key of championKeys) {
         const champ = merakiData[key];
+        const dd = ddImages[key];
         const abilities = [];
 
         for (const abilityKey of ABILITY_KEYS) {
             const abilityArray = champ.abilities[abilityKey];
             if (abilityArray == null) continue;
-            const extracted = extractAbility(abilityKey, abilityArray);
+
+            // Get DDragon image filename for this ability
+            let ddImage = null;
+            if (dd != null) {
+                if (abilityKey === "P") {
+                    ddImage = dd.passiveImage;
+                } else if (SPELL_INDEX[abilityKey] != null) {
+                    ddImage = dd.spellImages[SPELL_INDEX[abilityKey]] || null;
+                }
+            }
+
+            const extracted = extractAbility(abilityKey, abilityArray, ddImage);
             if (extracted != null) {
                 abilities.push(extracted);
             }

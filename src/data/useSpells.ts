@@ -21,7 +21,7 @@ interface RawEffect {
 interface RawAbility {
     key: string;
     name: string;
-    icon: string | null;
+    image: string | null;
     effects: RawEffect[];
     cooldown: string | null;
     cost: string | null;
@@ -67,23 +67,21 @@ function isAbilityKey(key: string): key is AbilityKey {
     return key === "P" || key === "Q" || key === "W" || key === "E" || key === "R";
 }
 
-function buildSpellImageUrl(champion: Champion, key: AbilityKey): string {
+function buildImageUrl(key: AbilityKey, image: string | null): string {
+    if (image == null) return "";
     if (key === "P") {
-        return `https://cdn.communitydragon.org/latest/champion/${champion.id}/ability-icon/p`;
+        return `https://ddragon.leagueoflegends.com/cdn/${version}/img/passive/${image}`;
     }
-    return `https://cdn.communitydragon.org/latest/champion/${champion.id}/ability-icon/${key.toLowerCase()}`;
+    return `https://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${image}`;
 }
 
-function buildAbilities(
-    data: RawChampionSpells,
-    champion: Champion
-): SpellInfo[] {
+function buildAbilities(data: RawChampionSpells): SpellInfo[] {
     return data.abilities
         .filter((a) => isAbilityKey(a.key))
         .map((a) => ({
             key: a.key as AbilityKey,
             name: a.name,
-            imageUrl: a.icon ?? buildSpellImageUrl(champion, a.key as AbilityKey),
+            imageUrl: buildImageUrl(a.key as AbilityKey, a.image),
             effects: a.effects,
             cooldown: a.cooldown,
             cost: a.cost,
@@ -104,7 +102,7 @@ export function useSpells(): {
                 if (data == null) return null;
                 return {
                     champion,
-                    abilities: buildAbilities(data, champion),
+                    abilities: buildAbilities(data),
                 };
             },
         }),
