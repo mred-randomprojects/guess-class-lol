@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useChampions, getImageUrl } from "./data/useChampions";
 import { useSpells } from "./data/useSpells";
@@ -7,6 +7,8 @@ import type { Champion, GameChampion } from "./types";
 import type { ChampionClass } from "./data/classes";
 import { CHAMPION_CLASSES, CLASS_GROUPS } from "./data/classes";
 import { shuffleChampions } from "./gameLogic";
+import { appendHistory } from "./data/skillsHistory";
+import type { SkillReviewRecord } from "./data/skillsHistory";
 
 type Rating = "nailed" | "partial" | "no_idea";
 type GameMode = "per-champion" | "per-ability";
@@ -334,6 +336,21 @@ function SkillsTrainer() {
         setFinished(false);
     }, []);
 
+    // Persist results to localStorage when a session finishes
+    useEffect(() => {
+        if (!finished || results.length === 0) return;
+
+        const records: SkillReviewRecord[] = results.map((r) => ({
+            championId: r.champion.id,
+            championName: r.champion.name,
+            abilityKey: r.ability.key,
+            abilityName: r.ability.name,
+            rating: r.rating,
+            timestamp: Date.now(),
+        }));
+        appendHistory(records);
+    }, [finished, results]);
+
     // --- Results screen ---
     if (finished) {
         return <SkillsResults results={results} onRestart={restart} />;
@@ -348,12 +365,20 @@ function SkillsTrainer() {
                         <h1 className="text-xl font-bold tracking-tight text-rift-gold">
                             Skills Trainer
                         </h1>
-                        <Link
-                            to="/"
-                            className="rounded-lg border border-gray-600 px-3 py-1 text-sm text-gray-300 hover:border-gray-400 hover:text-white"
-                        >
-                            Back
-                        </Link>
+                        <div className="flex items-center gap-2">
+                            <Link
+                                to="/skills-trainer/progress"
+                                className="rounded-lg border border-rift-gold/40 px-3 py-1 text-sm text-rift-gold hover:border-rift-gold hover:bg-rift-gold/10"
+                            >
+                                Progress
+                            </Link>
+                            <Link
+                                to="/"
+                                className="rounded-lg border border-gray-600 px-3 py-1 text-sm text-gray-300 hover:border-gray-400 hover:text-white"
+                            >
+                                Back
+                            </Link>
+                        </div>
                     </div>
                 </header>
                 <main className="mx-auto max-w-4xl p-6">
