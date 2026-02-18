@@ -32,6 +32,7 @@ interface RawAbility {
 
 interface RawChampionSpells {
     name: string;
+    patchLastChanged: string | null;
     abilities: RawAbility[];
 }
 
@@ -58,6 +59,7 @@ export interface SpellInfo {
 
 export interface ChampionSpellSet {
     champion: Champion;
+    patchLastChanged: string | null;
     abilities: readonly SpellInfo[];
 }
 
@@ -102,6 +104,7 @@ export function useSpells(): {
                 if (data == null) return null;
                 return {
                     champion,
+                    patchLastChanged: data.patchLastChanged ?? null,
                     abilities: buildAbilities(data),
                 };
             },

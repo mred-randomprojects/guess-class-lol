@@ -20,6 +20,7 @@ interface AbilityResult {
 interface QueueItem {
     champion: Champion;
     ability: SpellInfo;
+    patchLastChanged: string | null;
 }
 
 const RATING_POINTS: Record<Rating, number> = {
@@ -27,6 +28,29 @@ const RATING_POINTS: Record<Rating, number> = {
     partial: 1,
     no_idea: 0,
 };
+
+/**
+ * Approximate the real-world date of a LoL patch from its version string.
+ * Patches follow a ~2-week cadence; each season starts around Jan 8.
+ * Format: "YY.NN" → e.g. "25.03" ≈ Feb 2025.
+ */
+function approximatePatchDate(patch: string): string | null {
+    const match = patch.match(/^(\d{2})\.(\d{1,2})$/);
+    if (match == null) return null;
+
+    const year = 2000 + parseInt(match[1], 10);
+    const patchNum = parseInt(match[2], 10);
+
+    const seasonStart = new Date(year, 0, 8);
+    const patchDate = new Date(
+        seasonStart.getTime() + (patchNum - 1) * 14 * 24 * 60 * 60 * 1000
+    );
+
+    return patchDate.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+    });
+}
 
 /** Color-code damage type labels */
 function damageTypeColor(damageType: string | null): string {
@@ -161,7 +185,7 @@ type AbilityKey = "P" | "Q" | "W" | "E" | "R";
 
 function SkillsTrainer() {
     const { champions, getGameChampion } = useChampions();
-    const { getSpellSet } = useSpells();
+    const { getSpellSet, version: dataVersion } = useSpells();
 
     const [gameMode, setGameMode] = useState<GameMode>("per-champion");
     const [showIcon, setShowIcon] = useState(true);
@@ -242,7 +266,11 @@ function SkillsTrainer() {
                 if (spellSet == null) continue;
                 for (const ability of spellSet.abilities) {
                     if (enabledKeys.has(ability.key)) {
-                        items.push({ champion: champ, ability });
+                        items.push({
+                            champion: champ,
+                            ability,
+                            patchLastChanged: spellSet.patchLastChanged,
+                        });
                     }
                 }
             }
@@ -486,6 +514,12 @@ function SkillsTrainer() {
                         >
                             Start
                         </button>
+
+                        <p className="text-xs text-gray-500">
+                            Data Dragon {dataVersion} — ability
+                            descriptions sourced from Meraki Analytics
+                            (per-champion patch shown during game)
+                        </p>
                     </section>
                 </main>
             </div>
@@ -501,7 +535,7 @@ function SkillsTrainer() {
         );
     }
 
-    const { champion, ability } = currentItem;
+    const { champion, ability, patchLastChanged } = currentItem;
 
     return (
         <div className="min-h-screen bg-rift-dark font-body text-gray-100">
@@ -537,6 +571,13 @@ function SkillsTrainer() {
                         <span className="text-xl font-bold text-white">
                             {champion.name}
                         </span>
+                        {patchLastChanged != null && (
+                            <p className="text-xs text-gray-500">
+                                Data from patch {patchLastChanged}
+                                {approximatePatchDate(patchLastChanged) != null &&
+                                    ` · ~${approximatePatchDate(patchLastChanged)}`}
+                            </p>
+                        )}
                     </div>
                 </section>
 

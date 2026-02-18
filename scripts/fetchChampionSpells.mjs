@@ -170,6 +170,7 @@ async function main() {
 
         champions[key] = {
             name: champ.name,
+            patchLastChanged: champ.patchLastChanged ?? null,
             abilities,
         };
     }

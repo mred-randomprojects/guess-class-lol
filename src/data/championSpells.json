@@ -1,9 +1,10 @@
 {
   "version": "16.3.1",
-  "fetchedAt": "2026-02-17T22:43:32.144Z",
+  "fetchedAt": "2026-02-18T18:15:54.932Z",
   "champions": {
     "Aatrox": {
       "name": "Aatrox",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -205,6 +206,7 @@
     },
     "Ahri": {
       "name": "Ahri",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -363,6 +365,7 @@
     },
     "Akali": {
       "name": "Akali",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -534,6 +537,7 @@
     },
     "Akshan": {
       "name": "Akshan",
+      "patchLastChanged": "14.22",
       "abilities": [
         {
           "key": "P",
@@ -746,6 +750,7 @@
     },
     "Alistar": {
       "name": "Alistar",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -867,6 +872,7 @@
     },
     "Ambessa": {
       "name": "Ambessa",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -1034,6 +1040,7 @@
     },
     "Amumu": {
       "name": "Amumu",
+      "patchLastChanged": "14.9",
       "abilities": [
         {
           "key": "P",
@@ -1164,6 +1171,7 @@
     },
     "Anivia": {
       "name": "Anivia",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -1343,6 +1351,7 @@
     },
     "Annie": {
       "name": "Annie",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -1490,6 +1499,7 @@
     },
     "Aphelios": {
       "name": "Aphelios",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -1612,6 +1622,7 @@
     },
     "Ashe": {
       "name": "Ashe",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -1752,6 +1763,7 @@
     },
     "AurelionSol": {
       "name": "Aurelion Sol",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -1926,6 +1938,7 @@
     },
     "Aurora": {
       "name": "Aurora",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -2098,6 +2111,7 @@
     },
     "Azir": {
       "name": "Azir",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -2272,6 +2286,7 @@
     },
     "Bard": {
       "name": "Bard",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -2411,6 +2426,7 @@
     },
     "Belveth": {
       "name": "Bel'Veth",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -2637,6 +2653,7 @@
     },
     "Blitzcrank": {
       "name": "Blitzcrank",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -2762,6 +2779,7 @@
     },
     "Brand": {
       "name": "Brand",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -2921,6 +2939,7 @@
     },
     "Braum": {
       "name": "Braum",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -3081,6 +3100,7 @@
     },
     "Briar": {
       "name": "Briar",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -3277,6 +3297,7 @@
     },
     "Caitlyn": {
       "name": "Caitlyn",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -3428,6 +3449,7 @@
     },
     "Camille": {
       "name": "Camille",
+      "patchLastChanged": "14.21",
       "abilities": [
         {
           "key": "P",
@@ -3600,6 +3622,7 @@
     },
     "Cassiopeia": {
       "name": "Cassiopeia",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -3750,6 +3773,7 @@
     },
     "Chogath": {
       "name": "Cho'Gath",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -3905,6 +3929,7 @@
     },
     "Corki": {
       "name": "Corki",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -4055,6 +4080,7 @@
     },
     "Darius": {
       "name": "Darius",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -4220,6 +4246,7 @@
     },
     "Diana": {
       "name": "Diana",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -4375,6 +4402,7 @@
     },
     "DrMundo": {
       "name": "Dr. Mundo",
+      "patchLastChanged": "25.05",
       "abilities": [
         {
           "key": "P",
@@ -4567,6 +4595,7 @@
     },
     "Draven": {
       "name": "Draven",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -4729,6 +4758,7 @@
     },
     "Ekko": {
       "name": "Ekko",
+      "patchLastChanged": "25.04",
       "abilities": [
         {
           "key": "P",
@@ -4896,6 +4926,7 @@
     },
     "Elise": {
       "name": "Elise",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -5032,6 +5063,7 @@
     },
     "Evelynn": {
       "name": "Evelynn",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -5239,6 +5271,7 @@
     },
     "Ezreal": {
       "name": "Ezreal",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -5377,6 +5410,7 @@
     },
     "Fiddlesticks": {
       "name": "Fiddlesticks",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -5577,6 +5611,7 @@
     },
     "Fiora": {
       "name": "Fiora",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -5744,6 +5779,7 @@
     },
     "Fizz": {
       "name": "Fizz",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -5925,6 +5961,7 @@
     },
     "Galio": {
       "name": "Galio",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -6084,6 +6121,7 @@
     },
     "Gangplank": {
       "name": "Gangplank",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -6281,6 +6319,7 @@
     },
     "Garen": {
       "name": "Garen",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -6436,6 +6475,7 @@
     },
     "Gnar": {
       "name": "Gnar",
+      "patchLastChanged": "14.18",
       "abilities": [
         {
           "key": "P",
@@ -6620,6 +6660,7 @@
     },
     "Gragas": {
       "name": "Gragas",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -6770,6 +6811,7 @@
     },
     "Graves": {
       "name": "Graves",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -6933,6 +6975,7 @@
     },
     "Gwen": {
       "name": "Gwen",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -7127,6 +7170,7 @@
     },
     "Hecarim": {
       "name": "Hecarim",
+      "patchLastChanged": "14.24",
       "abilities": [
         {
           "key": "P",
@@ -7281,6 +7325,7 @@
     },
     "Heimerdinger": {
       "name": "Heimerdinger",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -7429,6 +7474,7 @@
     },
     "Hwei": {
       "name": "Hwei",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -7544,6 +7590,7 @@
     },
     "Illaoi": {
       "name": "Illaoi",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -7701,6 +7748,7 @@
     },
     "Irelia": {
       "name": "Irelia",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -7862,6 +7910,7 @@
     },
     "Ivern": {
       "name": "Ivern",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -8036,6 +8085,7 @@
     },
     "Janna": {
       "name": "Janna",
+      "patchLastChanged": "14.20",
       "abilities": [
         {
           "key": "P",
@@ -8195,6 +8245,7 @@
     },
     "JarvanIV": {
       "name": "Jarvan IV",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -8346,6 +8397,7 @@
     },
     "Jax": {
       "name": "Jax",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -8508,6 +8560,7 @@
     },
     "Jayce": {
       "name": "Jayce",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -8641,6 +8694,7 @@
     },
     "Jhin": {
       "name": "Jhin",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -8829,6 +8883,7 @@
     },
     "Jinx": {
       "name": "Jinx",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -8996,6 +9051,7 @@
     },
     "KSante": {
       "name": "K'Sante",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -9196,6 +9252,7 @@
     },
     "Kaisa": {
       "name": "Kai'Sa",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -9364,6 +9421,7 @@
     },
     "Kalista": {
       "name": "Kalista",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -9542,6 +9600,7 @@
     },
     "Karma": {
       "name": "Karma",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -9659,6 +9718,7 @@
     },
     "Karthus": {
       "name": "Karthus",
+      "patchLastChanged": "14.24",
       "abilities": [
         {
           "key": "P",
@@ -9802,6 +9862,7 @@
     },
     "Kassadin": {
       "name": "Kassadin",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -9957,6 +10018,7 @@
     },
     "Katarina": {
       "name": "Katarina",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -10102,6 +10164,7 @@
     },
     "Kayle": {
       "name": "Kayle",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -10260,6 +10323,7 @@
     },
     "Kayn": {
       "name": "Kayn",
+      "patchLastChanged": "25.10",
       "abilities": [
         {
           "key": "P",
@@ -10452,6 +10516,7 @@
     },
     "Kennen": {
       "name": "Kennen",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -10621,6 +10686,7 @@
     },
     "Khazix": {
       "name": "Kha'Zix",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -10754,6 +10820,7 @@
     },
     "Kindred": {
       "name": "Kindred",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -10912,6 +10979,7 @@
     },
     "Kled": {
       "name": "Kled",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -11113,6 +11181,7 @@
     },
     "KogMaw": {
       "name": "Kog'Maw",
+      "patchLastChanged": "25.04",
       "abilities": [
         {
           "key": "P",
@@ -11260,6 +11329,7 @@
     },
     "Leblanc": {
       "name": "LeBlanc",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -11441,6 +11511,7 @@
     },
     "LeeSin": {
       "name": "Lee Sin",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -11575,6 +11646,7 @@
     },
     "Leona": {
       "name": "Leona",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -11713,6 +11785,7 @@
     },
     "Lillia": {
       "name": "Lillia",
+      "patchLastChanged": "25.07",
       "abilities": [
         {
           "key": "P",
@@ -11872,6 +11945,7 @@
     },
     "Lissandra": {
       "name": "Lissandra",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -12026,6 +12100,7 @@
     },
     "Lucian": {
       "name": "Lucian",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -12183,6 +12258,7 @@
     },
     "Lulu": {
       "name": "Lulu",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -12355,6 +12431,7 @@
     },
     "Lux": {
       "name": "Lux",
+      "patchLastChanged": "14.10",
       "abilities": [
         {
           "key": "P",
@@ -12485,6 +12562,7 @@
     },
     "Malphite": {
       "name": "Malphite",
+      "patchLastChanged": "14.21",
       "abilities": [
         {
           "key": "P",
@@ -12632,6 +12710,7 @@
     },
     "Malzahar": {
       "name": "Malzahar",
+      "patchLastChanged": "25.04",
       "abilities": [
         {
           "key": "P",
@@ -12799,6 +12878,7 @@
     },
     "Maokai": {
       "name": "Maokai",
+      "patchLastChanged": "14.22",
       "abilities": [
         {
           "key": "P",
@@ -12958,6 +13038,7 @@
     },
     "MasterYi": {
       "name": "Master Yi",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -13160,6 +13241,7 @@
     },
     "Mel": {
       "name": "Mel",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -13348,6 +13430,7 @@
     },
     "Milio": {
       "name": "Milio",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -13505,6 +13588,7 @@
     },
     "MissFortune": {
       "name": "Miss Fortune",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -13651,6 +13735,7 @@
     },
     "Mordekaiser": {
       "name": "Mordekaiser",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -13788,6 +13873,7 @@
     },
     "Morgana": {
       "name": "Morgana",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -13934,6 +14020,7 @@
     },
     "Naafiri": {
       "name": "Naafiri",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -14133,6 +14220,7 @@
     },
     "Nami": {
       "name": "Nami",
+      "patchLastChanged": "14.24",
       "abilities": [
         {
           "key": "P",
@@ -14270,6 +14358,7 @@
     },
     "Nasus": {
       "name": "Nasus",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -14433,6 +14522,7 @@
     },
     "Nautilus": {
       "name": "Nautilus",
+      "patchLastChanged": "25.04",
       "abilities": [
         {
           "key": "P",
@@ -14613,6 +14703,7 @@
     },
     "Neeko": {
       "name": "Neeko",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -14794,6 +14885,7 @@
     },
     "Nidalee": {
       "name": "Nidalee",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -14938,6 +15030,7 @@
     },
     "Nilah": {
       "name": "Nilah",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -15095,6 +15188,7 @@
     },
     "Nocturne": {
       "name": "Nocturne",
+      "patchLastChanged": "25.10",
       "abilities": [
         {
           "key": "P",
@@ -15254,6 +15348,7 @@
     },
     "Nunu": {
       "name": "Nunu & Willump",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -15469,6 +15564,7 @@
     },
     "Olaf": {
       "name": "Olaf",
+      "patchLastChanged": "25.07",
       "abilities": [
         {
           "key": "P",
@@ -15637,6 +15733,7 @@
     },
     "Orianna": {
       "name": "Orianna",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -15776,6 +15873,7 @@
     },
     "Ornn": {
       "name": "Ornn",
+      "patchLastChanged": "25.02",
       "abilities": [
         {
           "key": "P",
@@ -15963,6 +16061,7 @@
     },
     "Pantheon": {
       "name": "Pantheon",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -16158,6 +16257,7 @@
     },
     "Poppy": {
       "name": "Poppy",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -16330,6 +16430,7 @@
     },
     "Pyke": {
       "name": "Pyke",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -16465,6 +16566,7 @@
     },
     "Qiyana": {
       "name": "Qiyana",
+      "patchLastChanged": "14.21",
       "abilities": [
         {
           "key": "P",
@@ -16622,6 +16724,7 @@
     },
     "Quinn": {
       "name": "Quinn",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -16763,6 +16866,7 @@
     },
     "Rakan": {
       "name": "Rakan",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -16908,6 +17012,7 @@
     },
     "Rammus": {
       "name": "Rammus",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -17057,6 +17162,7 @@
     },
     "RekSai": {
       "name": "Rek'Sai",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -17199,6 +17305,7 @@
     },
     "Rell": {
       "name": "Rell",
+      "patchLastChanged": "25.15",
       "abilities": [
         {
           "key": "P",
@@ -17349,6 +17456,7 @@
     },
     "Renata": {
       "name": "Renata Glasc",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -17498,6 +17606,7 @@
     },
     "Renekton": {
       "name": "Renekton",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -17694,6 +17803,7 @@
     },
     "Rengar": {
       "name": "Rengar",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -17864,6 +17974,7 @@
     },
     "Riven": {
       "name": "Riven",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -17992,6 +18103,7 @@
     },
     "Rumble": {
       "name": "Rumble",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -18233,6 +18345,7 @@
     },
     "Ryze": {
       "name": "Ryze",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -18371,6 +18484,7 @@
     },
     "Samira": {
       "name": "Samira",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -18548,6 +18662,7 @@
     },
     "Sejuani": {
       "name": "Sejuani",
+      "patchLastChanged": "14.15",
       "abilities": [
         {
           "key": "P",
@@ -18707,6 +18822,7 @@
     },
     "Senna": {
       "name": "Senna",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -18870,6 +18986,7 @@
     },
     "Seraphine": {
       "name": "Seraphine",
+      "patchLastChanged": "25.05",
       "abilities": [
         {
           "key": "P",
@@ -19029,6 +19146,7 @@
     },
     "Sett": {
       "name": "Sett",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -19186,6 +19304,7 @@
     },
     "Shaco": {
       "name": "Shaco",
+      "patchLastChanged": "25.07",
       "abilities": [
         {
           "key": "P",
@@ -19399,6 +19518,7 @@
     },
     "Shen": {
       "name": "Shen",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -19554,6 +19674,7 @@
     },
     "Shyvana": {
       "name": "Shyvana",
+      "patchLastChanged": "14.23",
       "abilities": [
         {
           "key": "P",
@@ -19744,6 +19865,7 @@
     },
     "Singed": {
       "name": "Singed",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -19890,6 +20012,7 @@
     },
     "Sion": {
       "name": "Sion",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -20094,6 +20217,7 @@
     },
     "Sivir": {
       "name": "Sivir",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -20257,6 +20381,7 @@
     },
     "Skarner": {
       "name": "Skarner",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -20411,6 +20536,7 @@
     },
     "Smolder": {
       "name": "Smolder",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -20581,6 +20707,7 @@
     },
     "Sona": {
       "name": "Sona",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -20729,6 +20856,7 @@
     },
     "Soraka": {
       "name": "Soraka",
+      "patchLastChanged": "14.24",
       "abilities": [
         {
           "key": "P",
@@ -20889,6 +21017,7 @@
     },
     "Swain": {
       "name": "Swain",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -21046,6 +21175,7 @@
     },
     "Sylas": {
       "name": "Sylas",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -21203,6 +21333,7 @@
     },
     "Syndra": {
       "name": "Syndra",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -21378,6 +21509,7 @@
     },
     "TahmKench": {
       "name": "Tahm Kench",
+      "patchLastChanged": "25.02",
       "abilities": [
         {
           "key": "P",
@@ -21539,6 +21671,7 @@
     },
     "Taliyah": {
       "name": "Taliyah",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -21705,6 +21838,7 @@
     },
     "Talon": {
       "name": "Talon",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -21867,6 +22001,7 @@
     },
     "Taric": {
       "name": "Taric",
+      "patchLastChanged": "14.21",
       "abilities": [
         {
           "key": "P",
@@ -21988,6 +22123,7 @@
     },
     "Teemo": {
       "name": "Teemo",
+      "patchLastChanged": "25.04",
       "abilities": [
         {
           "key": "P",
@@ -22187,6 +22323,7 @@
     },
     "Thresh": {
       "name": "Thresh",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -22345,6 +22482,7 @@
     },
     "Tristana": {
       "name": "Tristana",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -22496,6 +22634,7 @@
     },
     "Trundle": {
       "name": "Trundle",
+      "patchLastChanged": "25.07",
       "abilities": [
         {
           "key": "P",
@@ -22639,6 +22778,7 @@
     },
     "Tryndamere": {
       "name": "Tryndamere",
+      "patchLastChanged": "14.20",
       "abilities": [
         {
           "key": "P",
@@ -22802,6 +22942,7 @@
     },
     "TwistedFate": {
       "name": "Twisted Fate",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -22965,6 +23106,7 @@
     },
     "Twitch": {
       "name": "Twitch",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -23120,6 +23262,7 @@
     },
     "Udyr": {
       "name": "Udyr",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -23325,6 +23468,7 @@
     },
     "Urgot": {
       "name": "Urgot",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -23487,6 +23631,7 @@
     },
     "Varus": {
       "name": "Varus",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -23683,6 +23828,7 @@
     },
     "Vayne": {
       "name": "Vayne",
+      "patchLastChanged": "14.22",
       "abilities": [
         {
           "key": "P",
@@ -23830,6 +23976,7 @@
     },
     "Veigar": {
       "name": "Veigar",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -23955,6 +24102,7 @@
     },
     "Velkoz": {
       "name": "Vel'Koz",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -24122,6 +24270,7 @@
     },
     "Vex": {
       "name": "Vex",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -24272,6 +24421,7 @@
     },
     "Vi": {
       "name": "Vi",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -24422,6 +24572,7 @@
     },
     "Viego": {
       "name": "Viego",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -24612,6 +24763,7 @@
     },
     "Viktor": {
       "name": "Viktor",
+      "patchLastChanged": "25.06",
       "abilities": [
         {
           "key": "P",
@@ -24788,6 +24940,7 @@
     },
     "Vladimir": {
       "name": "Vladimir",
+      "patchLastChanged": "25.11",
       "abilities": [
         {
           "key": "P",
@@ -24963,6 +25116,7 @@
     },
     "Volibear": {
       "name": "Volibear",
+      "patchLastChanged": "25.07",
       "abilities": [
         {
           "key": "P",
@@ -25144,6 +25298,7 @@
     },
     "Warwick": {
       "name": "Warwick",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -25315,6 +25470,7 @@
     },
     "MonkeyKing": {
       "name": "Wukong",
+      "patchLastChanged": "25.03",
       "abilities": [
         {
           "key": "P",
@@ -25490,6 +25646,7 @@
     },
     "Xayah": {
       "name": "Xayah",
+      "patchLastChanged": "14.21",
       "abilities": [
         {
           "key": "P",
@@ -25648,6 +25805,7 @@
     },
     "Xerath": {
       "name": "Xerath",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -25822,6 +25980,7 @@
     },
     "XinZhao": {
       "name": "Xin Zhao",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -25980,6 +26139,7 @@
     },
     "Yasuo": {
       "name": "Yasuo",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -26146,6 +26306,7 @@
     },
     "Yone": {
       "name": "Yone",
+      "patchLastChanged": "25.09",
       "abilities": [
         {
           "key": "P",
@@ -26311,6 +26472,7 @@
     },
     "Yorick": {
       "name": "Yorick",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -26477,6 +26639,7 @@
     },
     "Yunara": {
       "name": "Yunara",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -26639,6 +26802,7 @@
     },
     "Yuumi": {
       "name": "Yuumi",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -26853,6 +27017,7 @@
     },
     "Zac": {
       "name": "Zac",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -27040,6 +27205,7 @@
     },
     "Zed": {
       "name": "Zed",
+      "patchLastChanged": "25.08",
       "abilities": [
         {
           "key": "P",
@@ -27202,6 +27368,7 @@
     },
     "Zeri": {
       "name": "Zeri",
+      "patchLastChanged": "25.12",
       "abilities": [
         {
           "key": "P",
@@ -27359,6 +27526,7 @@
     },
     "Ziggs": {
       "name": "Ziggs",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -27513,6 +27681,7 @@
     },
     "Zilean": {
       "name": "Zilean",
+      "patchLastChanged": "25.13",
       "abilities": [
         {
           "key": "P",
@@ -27646,6 +27815,7 @@
     },
     "Zoe": {
       "name": "Zoe",
+      "patchLastChanged": "25.14",
       "abilities": [
         {
           "key": "P",
@@ -27816,6 +27986,7 @@
     },
     "Zyra": {
       "name": "Zyra",
+      "patchLastChanged": "14.24",
       "abilities": [
         {
           "key": "P",
