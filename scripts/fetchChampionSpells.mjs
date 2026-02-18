@@ -24,15 +24,25 @@ async function fetchJson(url) {
 }
 
 /**
+ * Round a number to at most 1 decimal place.
+ * Non-numbers pass through unchanged.
+ */
+function tidyNumber(n) {
+    if (typeof n !== "number") return n;
+    return Math.round(n * 10) / 10;
+}
+
+/**
  * Formats a single leveling entry into a human-readable string.
  * e.g. "Magic Damage: 85/130/175/220/265 (+90% AP)"
  */
 function formatLeveling(entry) {
     const parts = [];
     for (const mod of entry.modifiers) {
-        const unique = [...new Set(mod.values)];
+        const tidied = mod.values.map(tidyNumber);
+        const unique = [...new Set(tidied)];
         const valStr =
-            unique.length === 1 ? `${unique[0]}` : mod.values.join("/");
+            unique.length === 1 ? `${unique[0]}` : tidied.join("/");
         const unit = mod.units[0] || "";
         if (unit) {
             parts.push(`${valStr}${unit}`);
@@ -59,9 +69,10 @@ function formatModifiers(obj) {
     if (obj == null || obj.modifiers == null) return null;
     const parts = [];
     for (const mod of obj.modifiers) {
-        const unique = [...new Set(mod.values)];
+        const tidied = mod.values.map(tidyNumber);
+        const unique = [...new Set(tidied)];
         const valStr =
-            unique.length === 1 ? `${unique[0]}` : mod.values.join("/");
+            unique.length === 1 ? `${unique[0]}` : tidied.join("/");
         const unit = mod.units[0] || "";
         parts.push(`${valStr}${unit}`);
     }

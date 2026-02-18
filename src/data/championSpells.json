@@ -1,6 +1,6 @@
 {
-  "version": "16.3.1",
-  "fetchedAt": "2026-02-18T18:15:54.932Z",
+  "version": "16.4.1",
+  "fetchedAt": "2026-02-18T20:36:14.665Z",
   "champions": {
     "Aatrox": {
       "name": "Aatrox",
@@ -20,7 +20,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "22/21.294117647058822/20.58823529411765/19.88235294117647/19.176470588235293/18.470588235294116/17.764705882352942/17.058823529411764/16.352941176470587/15.647058823529411/14.941176470588236/14.235294117647058/13.529411764705882/12.823529411764705/12.117647058823529/11.411764705882351/10.705882352941176/10",
+          "cooldown": "22/21.3/20.6/19.9/19.2/18.5/17.8/17.1/16.4/15.6/14.9/14.2/13.5/12.8/12.1/11.4/10.7/10",
           "cost": null,
           "resource": null,
           "damageType": "MAGIC_DAMAGE",
@@ -48,7 +48,7 @@
                 },
                 {
                   "attribute": "First Sweetspot Damage",
-                  "value": "17/42.5/68/93.5/119 (+102/114.75/127.5/140.25/153% AD)"
+                  "value": "17/42.5/68/93.5/119 (+102/114.8/127.5/140.3/153% AD)"
                 }
               ]
             },
@@ -57,11 +57,11 @@
               "scalings": [
                 {
                   "attribute": "Second Cast Damage",
-                  "value": "12.5/31.25/50/68.75/87.5 (+75/84.375/93.75/103.125/112.5% AD)"
+                  "value": "12.5/31.3/50/68.8/87.5 (+75/84.4/93.8/103.1/112.5% AD)"
                 },
                 {
                   "attribute": "Second Sweetspot Damage",
-                  "value": "21.25/53.125/85/116.875/148.75 (+127.5/143.4375/159.375/175.3125/191.25% AD)"
+                  "value": "21.3/53.1/85/116.9/148.8 (+127.5/143.4/159.4/175.3/191.3% AD)"
                 }
               ]
             },
@@ -70,11 +70,11 @@
               "scalings": [
                 {
                   "attribute": "Third Cast Damage",
-                  "value": "15/37.5/60/82.5/105 (+90/101.25/112.5/123.75/135% AD)"
+                  "value": "15/37.5/60/82.5/105 (+90/101.3/112.5/123.8/135% AD)"
                 },
                 {
                   "attribute": "Third Sweetspot Damage",
-                  "value": "25.5/63.75/102/140.25/178.5 (+153/172.125/191.25/210.375/229.5% AD)"
+                  "value": "25.5/63.8/102/140.3/178.5 (+153/172.1/191.3/210.4/229.5% AD)"
                 }
               ]
             },
@@ -83,11 +83,11 @@
               "scalings": [
                 {
                   "attribute": "Maximum Non-Minion Non-Sweetspot Damage",
-                  "value": "37.5/93.75/150/206.25/262.5 (+225/253.125/281.25/309.375/337.5% AD)"
+                  "value": "37.5/93.8/150/206.3/262.5 (+225/253.1/281.3/309.4/337.5% AD)"
                 },
                 {
                   "attribute": "Maximum Non-Minion Sweetspot Damage",
-                  "value": "63.75/159.375/255/350.625/446.25 (+382.5/430.3125/478.125/525.9375/573.75% AD)"
+                  "value": "63.8/159.4/255/350.6/446.3 (+382.5/430.3/478.1/525.9/573.8% AD)"
                 }
               ]
             }
@@ -321,7 +321,7 @@
                 },
                 {
                   "attribute": "Disable Duration",
-                  "value": "1.2/1.35/1.5/1.65/1.8 seconds"
+                  "value": "1.2/1.4/1.5/1.7/1.8 seconds"
                 }
               ]
             }
@@ -600,7 +600,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "8/7.25/6.5/5.75/5",
+          "cooldown": "8/7.3/6.5/5.8/5",
           "cost": "60/65/70/75/80",
           "resource": "MANA",
           "damageType": "PHYSICAL_DAMAGE",
@@ -702,7 +702,7 @@
                 },
                 {
                   "attribute": "Bullet Storing Interval Time",
-                  "value": "0.625/0.5208/0.4167 seconds"
+                  "value": "0.6/0.5/0.4 seconds"
                 }
               ]
             },
@@ -1008,7 +1008,7 @@
                 },
                 {
                   "attribute": "Minion Healing Percentage",
-                  "value": "2.5/3.125/3.75% (+12.5% life steal)"
+                  "value": "2.5/3.1/3.8% (+12.5% life steal)"
                 },
                 {
                   "attribute": "Monster Healing Percentage",
@@ -1101,7 +1101,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "5 (+0.5/0.625/0.75/0.875/1% (+ 0.25% per 100 AP) of target's maximum health)"
+                  "value": "5 (+0.5/0.6/0.8/0.9/1% (+ 0.25% per 100 AP) of target's maximum health)"
                 }
               ]
             }
@@ -1261,7 +1261,7 @@
                 },
                 {
                   "attribute": "Distance between individual segments",
-                  "value": "133.33/125/120/116.67/114.29 units"
+                  "value": "133.3/125/120/116.7/114.3 units"
                 }
               ]
             }
@@ -1311,7 +1311,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "15/22.5/30 (+6.25% AP)"
+                  "value": "15/22.5/30 (+6.3% AP)"
                 },
                 {
                   "attribute": "Slow",
@@ -1324,7 +1324,7 @@
               "scalings": [
                 {
                   "attribute": "Empowered Damage per Tick",
-                  "value": "45/67.5/90 (+18.75% AP)"
+                  "value": "45/67.5/90 (+18.8% AP)"
                 },
                 {
                   "attribute": "Empowered Slow",
@@ -1791,15 +1791,15 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "5.625/7.5/9.375/11.25/13.125 (+6.875% AP)"
+                  "value": "5.6/7.5/9.4/11.3/13.1 (+6.9% AP)"
                 },
                 {
                   "attribute": "Reduced Damage per Tick",
-                  "value": "2.8125/3.75/4.6875/5.625/6.5625 (+3.4375% AP)"
+                  "value": "2.8/3.8/4.7/5.6/6.6 (+3.4% AP)"
                 },
                 {
                   "attribute": "Total Maximum Magic Damage",
-                  "value": "146.25/195/243.75/292.5 (+178.75% AP)"
+                  "value": "146.3/195/243.8/292.5 (+178.8% AP)"
                 }
               ]
             },
@@ -1830,7 +1830,7 @@
             }
           ],
           "cooldown": "3",
-          "cost": "8.75/10/11.25/12.5/13.75",
+          "cost": "8.8/10/11.3/12.5/13.8",
           "resource": "OTHER",
           "damageType": "MAGIC_DAMAGE",
           "targeting": "Direction"
@@ -1886,7 +1886,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "2.5/3.75/5/6.25/7.5 (+3% AP)"
+                  "value": "2.5/3.8/5/6.3/7.5 (+3% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -2016,7 +2016,7 @@
               "scalings": [
                 {
                   "attribute": "Invisibility Duration",
-                  "value": "1/1.15/1.3/1.45/1.6 seconds"
+                  "value": "1/1.2/1.3/1.5/1.6 seconds"
                 }
               ]
             },
@@ -2080,11 +2080,11 @@
               "scalings": [
                 {
                   "attribute": "Rift Duration",
-                  "value": "1.75/2.5/3.25 seconds"
+                  "value": "1.8/2.5/3.3 seconds"
                 },
                 {
                   "attribute": "Slow Duration",
-                  "value": "1.5/1.75/2 seconds"
+                  "value": "1.5/1.8/2 seconds"
                 }
               ]
             },
@@ -2188,7 +2188,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage",
-                  "value": "0/2.6470588235294117/5.294117647058823/7.9411764705882355/10.588235294117647/13.235294117647058/15.882352941176471/18.52941176470588/21.176470588235293/23.823529411764707/26.470588235294116/29.11764705882353/31.764705882352942/34.411764705882355/37.05882352941176/39.705882352941174/42.35294117647059/45 (+50/65/80/95/110) (+45/50/55/60/65% AP)"
+                  "value": "0/2.6/5.3/7.9/10.6/13.2/15.9/18.5/21.2/23.8/26.5/29.1/31.8/34.4/37.1/39.7/42.4/45 (+50/65/80/95/110) (+45/50/55/60/65% AP)"
                 }
               ]
             },
@@ -2512,7 +2512,7 @@
                 },
                 {
                   "attribute": "Slow Duration",
-                  "value": "1.25/1.5/1.75/2/2.25 seconds"
+                  "value": "1.3/1.5/1.8/2/2.3 seconds"
                 }
               ]
             },
@@ -2857,7 +2857,7 @@
               "scalings": [
                 {
                   "attribute": "Increased Damage",
-                  "value": "93.75/150/206.25/262.5/318.75 (+75% AP)"
+                  "value": "93.8/150/206.3/262.5/318.8 (+75% AP)"
                 }
               ]
             }
@@ -3042,7 +3042,7 @@
                 },
                 {
                   "attribute": "Barrier Duration",
-                  "value": "3/3.25/3.5/3.75/4 seconds"
+                  "value": "3/3.3/3.5/3.8/4 seconds"
                 }
               ]
             },
@@ -3202,7 +3202,7 @@
               "scalings": [
                 {
                   "attribute": "Heal Per Tick",
-                  "value": "2.5/2.875/3.25/3.625/4% maximum health"
+                  "value": "2.5/2.9/3.3/3.6/4% maximum health"
                 },
                 {
                   "attribute": "Maximum Heal",
@@ -3223,7 +3223,7 @@
                 },
                 {
                   "attribute": "Minimum Magic Damage",
-                  "value": "2/2.875/3.75/4.625/5.5 (+2.5% bonus AD) (+2.5% AP)"
+                  "value": "2/2.9/3.8/4.6/5.5 (+2.5% bonus AD) (+2.5% AP)"
                 }
               ]
             },
@@ -3541,7 +3541,7 @@
                 },
                 {
                   "attribute": "Bonus Non-Epic Monster Damage",
-                  "value": "3/3.25/3.5/3.75/4%  of target's maximum health (+1.25% per 100 bonus AD)"
+                  "value": "3/3.3/3.5/3.8/4%  of target's maximum health (+1.3% per 100 bonus AD)"
                 }
               ]
             },
@@ -3594,7 +3594,7 @@
               "scalings": [
                 {
                   "attribute": "Zone Duration",
-                  "value": "2.5/3.25/4 seconds"
+                  "value": "2.5/3.3/4 seconds"
                 }
               ]
             },
@@ -3658,7 +3658,7 @@
                 },
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "10.71/15.71/20.71/25.71/30.71 (+9.29% AP)"
+                  "value": "10.7/15.7/20.7/25.7/30.7 (+9.3% AP)"
                 }
               ]
             },
@@ -3737,12 +3737,12 @@
                 },
                 {
                   "attribute": "Reduced Heal",
-                  "value": "2.5/2.875/3.25/3.625/4% AP"
+                  "value": "2.5/2.9/3.3/3.6/4% AP"
                 }
               ]
             }
           ],
-          "cooldown": "0.75",
+          "cooldown": "0.8",
           "cost": "40",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -3852,11 +3852,11 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage",
-                  "value": "20/40/60/80/100 (+30% AP) (+2.5/2.85/3.2/3.55/3.9% (+ 0.5% per Feast stack) of target's maximum health)"
+                  "value": "20/40/60/80/100 (+30% AP) (+2.5/2.9/3.2/3.6/3.9% (+ 0.5% per Feast stack) of target's maximum health)"
                 },
                 {
                   "attribute": "Total Magic Damage",
-                  "value": "60/120/180/240/300 (+90% AP) (+7.5/8.55/9.6/10.65/11.7% (+ 1.5% per Feast stack) of target's maximum health)"
+                  "value": "60/120/180/240/300 (+90% AP) (+7.5/8.6/9.6/10.7/11.7% (+ 1.5% per Feast stack) of target's maximum health)"
                 },
                 {
                   "attribute": "Slow",
@@ -4015,7 +4015,7 @@
               "scalings": [
                 {
                   "attribute": "Physical Damage Per Tick",
-                  "value": "5/8.125/11.25/14.375/17.5 (+15% bonus AD)"
+                  "value": "5/8.1/11.3/14.4/17.5 (+15% bonus AD)"
                 },
                 {
                   "attribute": "Total Physical Damage",
@@ -4426,7 +4426,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "60/57.35294117647059/54.705882352941174/52.05882352941177/49.411764705882355/46.76470588235294/44.11764705882353/41.470588235294116/38.82352941176471/36.17647058823529/33.529411764705884/30.88235294117647/28.235294117647058/25.588235294117645/22.94117647058824/20.294117647058826/17.647058823529413/15",
+          "cooldown": "60/57.4/54.7/52.1/49.4/46.8/44.1/41.5/38.8/36.2/33.5/30.9/28.2/25.6/22.9/20.3/17.6/15",
           "cost": null,
           "resource": null,
           "damageType": null,
@@ -4480,7 +4480,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "5/8.75/12.5/16.25/20"
+                  "value": "5/8.8/12.5/16.3/20"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -4544,7 +4544,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "9/8.25/7.5/6.75/6",
+          "cooldown": "9/8.3/7.5/6.8/6",
           "cost": "10/25/40/55/70",
           "resource": "HEALTH",
           "damageType": "PHYSICAL_DAMAGE",
@@ -5166,7 +5166,7 @@
               "scalings": [
                 {
                   "attribute": "Disable Duration",
-                  "value": "1.25/1.5/1.75/2/2.25 seconds"
+                  "value": "1.3/1.5/1.8/2/2.3 seconds"
                 }
               ]
             },
@@ -5188,7 +5188,7 @@
                 },
                 {
                   "attribute": "Monster Disable Duration",
-                  "value": "3.25/3.5/3.75/4/4.25 seconds"
+                  "value": "3.3/3.5/3.8/4/4.3 seconds"
                 }
               ]
             },
@@ -5312,7 +5312,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "5.5/5.25/5/4.75/4.5",
+          "cooldown": "5.5/5.3/5/4.8/4.5",
           "cost": "28/31/34/37/40",
           "resource": "MANA",
           "damageType": "PHYSICAL_DAMAGE",
@@ -5505,11 +5505,11 @@
                 },
                 {
                   "attribute": "Damage per Instance",
-                  "value": "15/22.5/30/37.5/45 (+11.25% AP)"
+                  "value": "15/22.5/30/37.5/45 (+11.3% AP)"
                 },
                 {
                   "attribute": "Last Tick of Damage",
-                  "value": "15/22.5/30/37.5/45 (+11.25% AP) (+12/14.5/17/19.5/22% of target's missing health)"
+                  "value": "15/22.5/30/37.5/45 (+11.3% AP) (+12/14.5/17/19.5/22% of target's missing health)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -5526,15 +5526,15 @@
                 },
                 {
                   "attribute": "Total Heal per Champion",
-                  "value": "30/58.5/96/142.5/198 (+22.5/29.25/36/42.75/49.5% AP) (+3/4.7125/6.8/9.2625/12.1% of target's missing health)"
+                  "value": "30/58.5/96/142.5/198 (+22.5/29.3/36/42.8/49.5% AP) (+3/4.7/6.8/9.3/12.1% of target's missing health)"
                 },
                 {
                   "attribute": "Total Heal per Monster",
-                  "value": "72.9/109.35/145.8/182.25/218.7 (+54.675% AP) (+7.29/8.80875/10.3275/11.84625/13.365% of target's missing health)"
+                  "value": "72.9/109.4/145.8/182.3/218.7 (+54.7% AP) (+7.3/8.8/10.3/11.8/13.4% of target's missing health)"
                 },
                 {
                   "attribute": "Total Heal per Minion",
-                  "value": "9/13.5/18/22.5/27 (+6.75% AP) (+0.9/1.0875/1.275/1.4625/1.65% of target's missing health)"
+                  "value": "9/13.5/18/22.5/27 (+6.8% AP) (+0.9/1.1/1.3/1.5/1.7% of target's missing health)"
                 }
               ]
             },
@@ -5656,7 +5656,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "13/11.25/9.5/7.75/6",
+          "cooldown": "13/11.3/9.5/7.8/6",
           "cost": "20",
           "resource": "MANA",
           "damageType": "PHYSICAL_DAMAGE",
@@ -5752,7 +5752,7 @@
               "scalings": [
                 {
                   "attribute": "Heal per Tick",
-                  "value": "18.75/25/31.25 (+15% bonus AD)"
+                  "value": "18.8/25/31.3 (+15% bonus AD)"
                 },
                 {
                   "attribute": "Heal per Second",
@@ -5836,7 +5836,7 @@
                 },
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "3.33/5/6.67/8.33/10 (+5% AP)"
+                  "value": "3.3/5/6.7/8.3/10 (+5% AP)"
                 }
               ]
             },
@@ -6351,7 +6351,7 @@
               "scalings": [
                 {
                   "attribute": "Movement Speed Duration",
-                  "value": "1/1.65/2.3/2.95/3.6"
+                  "value": "1/1.7/2.3/3/3.6"
                 }
               ]
             },
@@ -6431,7 +6431,7 @@
               "scalings": [
                 {
                   "attribute": "Increased Damage Per Spin",
-                  "value": "5/8.75/12.5/16.25/20 (+45/48.75/52.5/56.25/60% AD)"
+                  "value": "5/8.8/12.5/16.3/20 (+45/48.8/52.5/56.3/60% AD)"
                 }
               ]
             },
@@ -6444,7 +6444,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "9/8.25/7.5/6.75/6",
+          "cooldown": "9/8.3/7.5/6.8/6",
           "cost": null,
           "resource": null,
           "damageType": "PHYSICAL_DAMAGE",
@@ -6636,7 +6636,7 @@
                 },
                 {
                   "attribute": "Disable Duration",
-                  "value": "1.25/1.5/1.75"
+                  "value": "1.3/1.5/1.8"
                 }
               ]
             },
@@ -6873,7 +6873,7 @@
               ]
             }
           ],
-          "cooldown": "13/11.25/9.5/7.75/6",
+          "cooldown": "13/11.3/9.5/7.8/6",
           "cost": "80",
           "resource": "MANA",
           "damageType": "PHYSICAL_DAMAGE",
@@ -7049,7 +7049,7 @@
               ]
             }
           ],
-          "cooldown": "6.5/5.75/5/4.25/3.5",
+          "cooldown": "6.5/5.8/5/4.3/3.5",
           "cost": "40",
           "resource": "MANA",
           "damageType": "OTHER_DAMAGE",
@@ -7550,7 +7550,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "2.5/5/7.5 (+1.25% AP)"
+                  "value": "2.5/5/7.5 (+1.3% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -7614,7 +7614,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "20/19.25/18.5/17.75/17/16.25/15.5/14.75/14/13.25/12.5/11.75/11/10.25/9.5/8.75/8/7.25",
+          "cooldown": "20/19.3/18.5/17.8/17/16.3/15.5/14.8/14/13.3/12.5/11.8/11/10.3/9.5/8.8/8/7.3",
           "cost": null,
           "resource": null,
           "damageType": "PHYSICAL_DAMAGE",
@@ -8743,11 +8743,11 @@
               "scalings": [
                 {
                   "attribute": "Bonus Damage per Target Death",
-                  "value": "15.4/24.15/32.9/41.65/50.4 (+15.4/18.025/20.65/23.275/25.9% AD) (+21% AP)"
+                  "value": "15.4/24.2/32.9/41.7/50.4 (+15.4/18/20.7/23.3/25.9% AD) (+21% AP)"
                 },
                 {
                   "attribute": "Maximum Final Bounce Physical Damage",
-                  "value": "90.2/141.45/192.7/243.95/295.2 (+90.2/105.575/120.95/136.325/151.7% AD) (+123% AP)"
+                  "value": "90.2/141.5/192.7/244/295.2 (+90.2/105.6/121/136.3/151.7% AD) (+123% AP)"
                 }
               ]
             }
@@ -8776,7 +8776,7 @@
                 },
                 {
                   "attribute": "Minion Damage",
-                  "value": "45/71.25/97.5/123.75/150 (+37.5% AD)"
+                  "value": "45/71.3/97.5/123.8/150 (+37.5% AD)"
                 }
               ]
             },
@@ -8785,7 +8785,7 @@
               "scalings": [
                 {
                   "attribute": "Root Duration",
-                  "value": "1.25/1.5/1.75/2/2.25 seconds"
+                  "value": "1.3/1.5/1.8/2/2.3 seconds"
                 }
               ]
             }
@@ -8927,7 +8927,7 @@
                 },
                 {
                   "attribute": "Attack Speed per Subsequent Stack",
-                  "value": "7.5/13.75/20/26.25/32.5%"
+                  "value": "7.5/13.8/20/26.3/32.5%"
                 },
                 {
                   "attribute": "Maximum Attack Speed",
@@ -9297,11 +9297,11 @@
               "scalings": [
                 {
                   "attribute": "Reduced Damage Per Missile",
-                  "value": "10/13.75/17.5/21.25/25 (+13.75% bonus AD) (+5% AP)"
+                  "value": "10/13.8/17.5/21.3/25 (+13.8% bonus AD) (+5% AP)"
                 },
                 {
                   "attribute": "Total Single-Target Damage",
-                  "value": "90/123.75/157.5/191.25/225 (+123.75% bonus AD) (+45% AP)"
+                  "value": "90/123.8/157.5/191.3/225 (+123.8% bonus AD) (+45% AP)"
                 }
               ]
             },
@@ -9310,7 +9310,7 @@
               "scalings": [
                 {
                   "attribute": "Total Evolved Single-Target Damage",
-                  "value": "150/206.25/262.5/318.75/375 (+206.25% bonus AD) (+75% AP)"
+                  "value": "150/206.3/262.5/318.8/375 (+206.3% bonus AD) (+75% AP)"
                 }
               ]
             },
@@ -10557,7 +10557,7 @@
               ]
             }
           ],
-          "cooldown": "7/6.25/5.5/4.75/4",
+          "cooldown": "7/6.3/5.5/4.8/4",
           "cost": "60/55/50/45/40",
           "resource": "ENERGY",
           "damageType": "MAGIC_DAMAGE",
@@ -10591,7 +10591,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "13/11.25/9.5/7.75/6",
+          "cooldown": "13/11.3/9.5/7.8/6",
           "cost": "40",
           "resource": "ENERGY",
           "damageType": "MAGIC_DAMAGE",
@@ -10667,7 +10667,7 @@
               "scalings": [
                 {
                   "attribute": "Total Single-Target Damage",
-                  "value": "300/562.5/825 (+168.75% AP)"
+                  "value": "300/562.5/825 (+168.8% AP)"
                 }
               ]
             },
@@ -10902,7 +10902,7 @@
                 },
                 {
                   "attribute": "Monster Damage",
-                  "value": "37.5/45/52.5/60/67.5 (+30% bonus AD) (+30% AP) (+2.25% (+ 1.5% per mark) of target's current health)"
+                  "value": "37.5/45/52.5/60/67.5 (+30% bonus AD) (+30% AP) (+2.3% (+ 1.5% per mark) of target's current health)"
                 }
               ]
             },
@@ -11078,7 +11078,7 @@
               "scalings": [
                 {
                   "attribute": "Structure Bonus Damage",
-                  "value": "62/63.75/65.5/67.25/69/70.75/72.5/74.25/76/77.75/79.5/81.25/83/84.75/86.5/88.25/90/91.75 (+0/15/30/45/60)"
+                  "value": "62/63.8/65.5/67.3/69/70.8/72.5/74.3/76/77.8/79.5/81.3/83/84.8/86.5/88.3/90/91.8 (+0/15/30/45/60)"
                 }
               ]
             }
@@ -11251,7 +11251,7 @@
                 },
                 {
                   "attribute": "Bonus Magic Damage",
-                  "value": "3/3.75/4.5/5.25/6%  of target's maximum health (+1% per 100 AP)"
+                  "value": "3/3.8/4.5/5.3/6%  of target's maximum health (+1% per 100 AP)"
                 }
               ]
             }
@@ -11408,7 +11408,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "15/13.75/12.5/11.25/10",
+          "cooldown": "15/13.8/12.5/11.3/10",
           "cost": "60/70/80/90/100",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -11442,7 +11442,7 @@
               ]
             }
           ],
-          "cooldown": "14/13.25/12.5/11.75/11",
+          "cooldown": "14/13.3/12.5/11.8/11",
           "cost": "50",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -12006,7 +12006,7 @@
                 },
                 {
                   "attribute": "Root Duration",
-                  "value": "1.25/1.35/1.45/1.55/1.65 seconds"
+                  "value": "1.3/1.4/1.5/1.6/1.7 seconds"
                 }
               ]
             }
@@ -12315,11 +12315,11 @@
                 },
                 {
                   "attribute": "Reduced Minion Damage",
-                  "value": "21/33.25/45.5/57.75/70 (+17.5% AP)"
+                  "value": "21/33.3/45.5/57.8/70 (+17.5% AP)"
                 },
                 {
                   "attribute": "Total Minion Damage",
-                  "value": "63/99.75/136.5/173.25/210 (+52.5% AP)"
+                  "value": "63/99.8/136.5/173.3/210 (+52.5% AP)"
                 }
               ]
             }
@@ -12357,7 +12357,7 @@
                 },
                 {
                   "attribute": "Effect Duration",
-                  "value": "3/3.25/3.5/3.75/4 seconds"
+                  "value": "3/3.3/3.5/3.8/4 seconds"
                 }
               ]
             }
@@ -12746,7 +12746,7 @@
                 },
                 {
                   "attribute": "Silence Duration",
-                  "value": "1/1.25/1.5/1.75/2 seconds"
+                  "value": "1/1.3/1.5/1.8/2 seconds"
                 }
               ]
             }
@@ -12813,7 +12813,7 @@
                 },
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "5/7.1875/9.375/11.5625/13.75 (+5% AP)"
+                  "value": "5/7.2/9.4/11.6/13.8 (+5% AP)"
                 }
               ]
             },
@@ -12859,7 +12859,7 @@
                 },
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "1/1.5/2%  of target's maximum health (+0.25% per 100 AP)"
+                  "value": "1/1.5/2%  of target's maximum health (+0.3% per 100 AP)"
                 }
               ]
             },
@@ -12898,7 +12898,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "30/29.41176470588235/28.823529411764707/28.235294117647058/27.647058823529413/27.058823529411764/26.470588235294116/25.88235294117647/25.294117647058822/24.705882352941178/24.11764705882353/23.529411764705884/22.941176470588236/22.352941176470587/21.764705882352942/21.176470588235293/20.588235294117645/20",
+          "cooldown": "30/29.4/28.8/28.2/27.6/27.1/26.5/25.9/25.3/24.7/24.1/23.5/22.9/22.4/21.8/21.2/20.6/20",
           "cost": null,
           "resource": null,
           "damageType": null,
@@ -12989,7 +12989,7 @@
                 },
                 {
                   "attribute": "Enhanced Damage Per Tick",
-                  "value": "33.33/50/66.67/83.33/100 (+3.33% bonus health) (+16.67% AP)"
+                  "value": "33.3/50/66.7/83.3/100 (+3.3% bonus health) (+16.7% AP)"
                 }
               ]
             },
@@ -13106,11 +13106,11 @@
                 },
                 {
                   "attribute": "Reduced Monster Damage per hit",
-                  "value": "20/31.25/42.5/53.75/65 (+17.5% AD)"
+                  "value": "20/31.3/42.5/53.8/65 (+17.5% AD)"
                 },
                 {
                   "attribute": "Max Single-Target Monster Damage",
-                  "value": "140/218.75/297.5/376.25/455 (+122.5% AD)"
+                  "value": "140/218.8/297.5/376.3/455 (+122.5% AD)"
                 }
               ]
             },
@@ -13168,7 +13168,7 @@
                 },
                 {
                   "attribute": "Turret Modified Damage Reduction",
-                  "value": "22.5/23.75/25/26.25/27.5%"
+                  "value": "22.5/23.8/25/26.3/27.5%"
                 }
               ]
             },
@@ -13281,7 +13281,7 @@
                 },
                 {
                   "attribute": "Minion Damage per Explosion",
-                  "value": "9.75/11.625/13.5/15.375/17.25 (+6.375% AP)"
+                  "value": "9.8/11.6/13.5/15.4/17.3 (+6.4% AP)"
                 },
                 {
                   "attribute": "Number of Bolts",
@@ -13293,7 +13293,7 @@
                 },
                 {
                   "attribute": "Total Minion Damage",
-                  "value": "58.5/81.375/108/138.375/172.5 (+38.25/44.625/51/57.375/63.75% AP)"
+                  "value": "58.5/81.4/108/138.4/172.5 (+38.3/44.6/51/57.4/63.8% AP)"
                 }
               ]
             },
@@ -13347,7 +13347,7 @@
                 },
                 {
                   "attribute": "Orb Root Duration",
-                  "value": "1.25/1.5/1.75/2/2.25 seconds"
+                  "value": "1.3/1.5/1.8/2/2.3 seconds"
                 }
               ]
             },
@@ -13683,7 +13683,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "8.75/12.5/16.25/20/23.75 (+15% AP)"
+                  "value": "8.8/12.5/16.3/20/23.8 (+15% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -13716,7 +13716,7 @@
                 },
                 {
                   "attribute": "Wave Interval Time",
-                  "value": "0.2036/0.1781/0.1583 seconds"
+                  "value": "0.2 seconds"
                 }
               ]
             },
@@ -13771,7 +13771,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage",
-                  "value": "0/2.6470588235294117/5.294117647058823/7.9411764705882355/10.588235294117647/13.235294117647058/15.882352941176471/18.52941176470588/21.176470588235293/23.823529411764707/26.470588235294116/29.11764705882353/31.764705882352942/34.411764705882355/37.05882352941176/39.705882352941174/42.35294117647059/45 (+80/115/150/185/220) (+70% AP)"
+                  "value": "0/2.6/5.3/7.9/10.6/13.2/15.9/18.5/21.2/23.8/26.5/29.1/31.8/34.4/37.1/39.7/42.4/45 (+80/115/150/185/220) (+70% AP)"
                 },
                 {
                   "attribute": "Damage Increase",
@@ -13905,7 +13905,7 @@
                 },
                 {
                   "attribute": "Root Duration",
-                  "value": "2/2.25/2.5/2.75/3 seconds"
+                  "value": "2/2.3/2.5/2.8/3 seconds"
                 }
               ]
             }
@@ -13934,7 +13934,7 @@
                 },
                 {
                   "attribute": "Maximum Damage Per Tick",
-                  "value": "16.2/31.05/45.9/60.75/75.6 (+22.95% AP)"
+                  "value": "16.2/31.1/45.9/60.8/75.6 (+23% AP)"
                 },
                 {
                   "attribute": "Minimum Total Damage",
@@ -14001,7 +14001,7 @@
               "scalings": [
                 {
                   "attribute": "Stun Duration",
-                  "value": "1.5/1.75/2 seconds"
+                  "value": "1.5/1.8/2 seconds"
                 }
               ]
             },
@@ -14423,11 +14423,11 @@
                 },
                 {
                   "attribute": "Maximum Cripple",
-                  "value": "35.25/44.25/53.25/62.25/71.25%"
+                  "value": "35.3/44.3/53.3/62.3/71.3%"
                 },
                 {
                   "attribute": "Additional Cripple Per Second",
-                  "value": "2.25/4.5/6.75/9/11.25%"
+                  "value": "2.3/4.5/6.8/9/11.3%"
                 }
               ]
             }
@@ -14646,7 +14646,7 @@
                 },
                 {
                   "attribute": "Reduced Monster Damage",
-                  "value": "41.25/67.5/93.75/120/146.25 (+37.5% AP)"
+                  "value": "41.3/67.5/93.8/120/146.3 (+37.5% AP)"
                 },
                 {
                   "attribute": "Maximum Total Monster Damage",
@@ -15295,7 +15295,7 @@
                 },
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "20/31.25/42.5/53.75/65 (+25% AP)"
+                  "value": "20/31.3/42.5/53.8/65 (+25% AP)"
                 }
               ]
             },
@@ -15304,7 +15304,7 @@
               "scalings": [
                 {
                   "attribute": "Disable Duration",
-                  "value": "1.25/1.5/1.75/2/2.25 seconds"
+                  "value": "1.3/1.5/1.8/2/2.3 seconds"
                 }
               ]
             }
@@ -15455,11 +15455,11 @@
               "scalings": [
                 {
                   "attribute": "Minimum Reduced Damage",
-                  "value": "11.988/14.985/17.982/20.979/23.976 (+9.99% AP)"
+                  "value": "12/15/18/21/24 (+10% AP)"
                 },
                 {
                   "attribute": "Maximum Reduced Damage",
-                  "value": "59.94/74.925/89.91/104.895/119.88 (+49.95% AP)"
+                  "value": "59.9/74.9/89.9/104.9/119.9 (+50% AP)"
                 }
               ]
             },
@@ -15778,7 +15778,7 @@
               ]
             }
           ],
-          "cooldown": "6/5.25/4.5/3.75/3",
+          "cooldown": "6/5.3/4.5/3.8/3",
           "cost": "35",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -16139,7 +16139,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "11/10.25/9.5/8.75/8",
+          "cooldown": "11/10.3/9.5/8.8/8",
           "cost": "25",
           "resource": "MANA",
           "damageType": "PHYSICAL_DAMAGE",
@@ -16989,7 +16989,7 @@
                 },
                 {
                   "attribute": "Disable Duration",
-                  "value": "1/1.25/1.5 seconds"
+                  "value": "1/1.3/1.5 seconds"
                 }
               ]
             },
@@ -17437,7 +17437,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "15/25/35 (+13.75% AP)"
+                  "value": "15/25/35 (+13.8% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -17587,7 +17587,7 @@
               "scalings": [
                 {
                   "attribute": "Berserk Duration",
-                  "value": "1.25/1.75/2.25 seconds"
+                  "value": "1.3/1.8/2.3 seconds"
                 }
               ]
             },
@@ -17843,7 +17843,7 @@
               "scalings": [
                 {
                   "attribute": "Bonus Physical Damage",
-                  "value": "30/60/90/120/150 (+0/3.75/7.5/11.25/15% AD)"
+                  "value": "30/60/90/120/150 (+0/3.8/7.5/11.3/15% AD)"
                 }
               ]
             },
@@ -18143,15 +18143,15 @@
                 },
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "5/7.5/10/12.5/15 (+9.17% AP) (+0.5/0.567/0.633/0.7/0.767% of target's maximum health)"
+                  "value": "5/7.5/10/12.5/15 (+9.2% AP) (+0.5/0.6/0.6/0.7/0.8% of target's maximum health)"
                 },
                 {
                   "attribute": "Total Minion Damage",
-                  "value": "42/63/84/105/126 (+77% AP) (+4.2/4.76/5.32/5.88/6.44% of target's maximum health)"
+                  "value": "42/63/84/105/126 (+77% AP) (+4.2/4.8/5.3/5.9/6.4% of target's maximum health)"
                 },
                 {
                   "attribute": "Minion Damage Per Tick",
-                  "value": "3.5/5.25/7/8.75/10.5 (+6.417% AP) (+0.35/0.397/0.443/0.49/0.537% of target's maximum health)"
+                  "value": "3.5/5.3/7/8.8/10.5 (+6.4% AP) (+0.4/0.4/0.4/0.5/0.5% of target's maximum health)"
                 }
               ]
             },
@@ -18164,15 +18164,15 @@
                 },
                 {
                   "attribute": "Enhanced Damage Per Tick",
-                  "value": "7.5/11.25/15/18.75/22.5 (+13.75% AP) (+0.75/0.85/0.95/1.05/1.15% of target's maximum health)"
+                  "value": "7.5/11.3/15/18.8/22.5 (+13.8% AP) (+0.8/0.9/1/1.1/1.2% of target's maximum health)"
                 },
                 {
                   "attribute": "Total Enhanced Minion Damage",
-                  "value": "63/94.5/126/157.5/189 (+115.5% AP) (+6.3/7.14/7.98/8.82/9.66% of target's maximum health)"
+                  "value": "63/94.5/126/157.5/189 (+115.5% AP) (+6.3/7.1/8/8.8/9.7% of target's maximum health)"
                 },
                 {
                   "attribute": "Enhanced Minion Damage Per Tick",
-                  "value": "5.25/7.875/10.5/13.125/15.75 (+9.625% AP) (+0.525/0.595/0.665/0.735/0.805% of target's maximum health)"
+                  "value": "5.3/7.9/10.5/13.1/15.8 (+9.6% AP) (+0.5/0.6/0.7/0.7/0.8% of target's maximum health)"
                 }
               ]
             },
@@ -18445,7 +18445,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "3.5/3.25/3/2.75/2.5",
+          "cooldown": "3.5/3.3/3/2.8/2.5",
           "cost": "35/45/55/65/75",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -18635,7 +18635,7 @@
                 },
                 {
                   "attribute": "Minion Damage Per Shot",
-                  "value": "1.25/3.75/6.25 (+11.25% AD)"
+                  "value": "1.3/3.8/6.3 (+11.3% AD)"
                 },
                 {
                   "attribute": "Total Minion Damage",
@@ -18870,7 +18870,7 @@
                 },
                 {
                   "attribute": "Slow Duration",
-                  "value": "1/1.25/1.5/1.75/2 seconds"
+                  "value": "1/1.3/1.5/1.8/2 seconds"
                 }
               ]
             },
@@ -18908,7 +18908,7 @@
               "scalings": [
                 {
                   "attribute": "Root Duration",
-                  "value": "1.25/1.5/1.75/2/2.25 seconds"
+                  "value": "1.3/1.5/1.8/2/2.3 seconds"
                 }
               ]
             }
@@ -19031,7 +19031,7 @@
               "scalings": [
                 {
                   "attribute": "Maximum Champion Damage",
-                  "value": "105/148.75/192.5/236.25/280 (+87.5% AP)"
+                  "value": "105/148.8/192.5/236.3/280 (+87.5% AP)"
                 }
               ]
             }
@@ -19127,7 +19127,7 @@
                 },
                 {
                   "attribute": "Disable Duration",
-                  "value": "1.25/1.5/1.75 seconds"
+                  "value": "1.3/1.5/1.8 seconds"
                 }
               ]
             },
@@ -19336,7 +19336,7 @@
               "scalings": [
                 {
                   "attribute": "Invisibility Duration",
-                  "value": "2.5/2.75/3/3.25/3.5 seconds"
+                  "value": "2.5/2.8/3/3.3/3.5 seconds"
                 }
               ]
             },
@@ -19378,15 +19378,15 @@
               "scalings": [
                 {
                   "attribute": "Fear Duration",
-                  "value": "0.5/0.75/1/1.25/1.5 seconds"
+                  "value": "0.5/0.8/1/1.3/1.5 seconds"
                 },
                 {
                   "attribute": "Root Duration",
-                  "value": "0.5/0.75/1/1/1 seconds"
+                  "value": "0.5/0.8/1/1/1 seconds"
                 },
                 {
                   "attribute": "Slow Duration",
-                  "value": "0.8/1.05/1.3/1.55/1.8 seconds"
+                  "value": "0.8/1.1/1.3/1.6/1.8 seconds"
                 }
               ]
             },
@@ -19559,11 +19559,11 @@
               "scalings": [
                 {
                   "attribute": "Bonus Magic Damage",
-                  "value": "10/11.764705882352942/13.529411764705882/15.294117647058822/17.058823529411764/18.823529411764707/20.588235294117645/22.352941176470587/24.11764705882353/25.88235294117647/27.647058823529413/29.41176470588235/31.176470588235293/32.94117647058823/34.705882352941174/36.470588235294116/38.23529411764706/40 (+2/2.5/3/3.5/4% (+ 1.5% per 100 AP) of target's maximum health)"
+                  "value": "10/11.8/13.5/15.3/17.1/18.8/20.6/22.4/24.1/25.9/27.6/29.4/31.2/32.9/34.7/36.5/38.2/40 (+2/2.5/3/3.5/4% (+ 1.5% per 100 AP) of target's maximum health)"
                 },
                 {
                   "attribute": "Total Magic Damage",
-                  "value": "30/35.294117647058826/40.588235294117645/45.88235294117647/51.17647058823529/56.470588235294116/61.76470588235294/67.05882352941177/72.35294117647058/77.64705882352942/82.94117647058823/88.23529411764706/93.52941176470588/98.82352941176471/104.11764705882352/109.41176470588235/114.70588235294117/120 (+6/7.5/9/10.5/12% (+ 4.5% per 100 AP) of target's maximum health)"
+                  "value": "30/35.3/40.6/45.9/51.2/56.5/61.8/67.1/72.4/77.6/82.9/88.2/93.5/98.8/104.1/109.4/114.7/120 (+6/7.5/9/10.5/12% (+ 4.5% per 100 AP) of target's maximum health)"
                 }
               ]
             },
@@ -19572,11 +19572,11 @@
               "scalings": [
                 {
                   "attribute": "Increased Bonus Damage",
-                  "value": "10/11.764705882352942/13.529411764705882/15.294117647058822/17.058823529411764/18.823529411764707/20.588235294117645/22.352941176470587/24.11764705882353/25.88235294117647/27.647058823529413/29.41176470588235/31.176470588235293/32.94117647058823/34.705882352941174/36.470588235294116/38.23529411764706/40 (+5/5.5/6/6.5/7% (+ 2% per 100 AP) of target's maximum health)"
+                  "value": "10/11.8/13.5/15.3/17.1/18.8/20.6/22.4/24.1/25.9/27.6/29.4/31.2/32.9/34.7/36.5/38.2/40 (+5/5.5/6/6.5/7% (+ 2% per 100 AP) of target's maximum health)"
                 },
                 {
                   "attribute": "Total Increased Damage",
-                  "value": "30/35.294117647058826/40.588235294117645/45.88235294117647/51.17647058823529/56.470588235294116/61.76470588235294/67.05882352941177/72.35294117647058/77.64705882352942/82.94117647058823/88.23529411764706/93.52941176470588/98.82352941176471/104.11764705882352/109.41176470588235/114.70588235294117/120 (+15/16.5/18/19.5/21% (+ 6% per 100 AP) of target's maximum health)"
+                  "value": "30/35.3/40.6/45.9/51.2/56.5/61.8/67.1/72.4/77.6/82.9/88.2/93.5/98.8/104.1/109.4/114.7/120 (+15/16.5/18/19.5/21% (+ 6% per 100 AP) of target's maximum health)"
                 }
               ]
             },
@@ -19590,7 +19590,7 @@
               ]
             }
           ],
-          "cooldown": "8/7.25/6.5/5.75/5",
+          "cooldown": "8/7.3/6.5/5.8/5",
           "cost": "140/130/120/110/100",
           "resource": "ENERGY",
           "damageType": "MAGIC_DAMAGE",
@@ -19752,7 +19752,7 @@
                 },
                 {
                   "attribute": "Bonus Movement Speed Decay",
-                  "value": "4.5/5.25/6/6.75/7.5%"
+                  "value": "4.5/5.3/6/6.8/7.5%"
                 },
                 {
                   "attribute": "Magic Damage Per Tick",
@@ -19803,7 +19803,7 @@
               "scalings": [
                 {
                   "attribute": "Increased Damage",
-                  "value": "75/78.52941176470588/82.05882352941177/85.58823529411765/89.11764705882354/92.64705882352942/96.17647058823529/99.70588235294117/103.23529411764706/106.76470588235294/110.29411764705883/113.8235294117647/117.35294117647058/120.88235294117646/124.41176470588235/127.94117647058823/131.47058823529412/135 (+85/125/165/205/245) (+100% bonus AD) (+90% AP)"
+                  "value": "75/78.5/82.1/85.6/89.1/92.6/96.2/99.7/103.2/106.8/110.3/113.8/117.4/120.9/124.4/127.9/131.5/135 (+85/125/165/205/245) (+100% bonus AD) (+90% AP)"
                 }
               ]
             }
@@ -19905,7 +19905,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "5/7.5/10/12.5/15 (+10.625% AP)"
+                  "value": "5/7.5/10/12.5/15 (+10.6% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -19964,7 +19964,7 @@
               "scalings": [
                 {
                   "attribute": "Root Duration",
-                  "value": "1/1.25/1.5/1.75/2 seconds"
+                  "value": "1/1.3/1.5/1.8/2 seconds"
                 }
               ]
             }
@@ -20048,7 +20048,7 @@
               "scalings": [
                 {
                   "attribute": "Maximum Base Damage Increase",
-                  "value": "125/158.33/175/185/191.67%"
+                  "value": "125/158.3/175/185/191.7%"
                 },
                 {
                   "attribute": "Minimum Physical Damage",
@@ -20291,15 +20291,15 @@
                 },
                 {
                   "attribute": "Bounce Critical Damage",
-                  "value": "70/74.375/78.75/83.125/87.5% AD"
+                  "value": "70/74.4/78.8/83.1/87.5% AD"
                 },
                 {
                   "attribute": "Minion Bounce Damage",
-                  "value": "26/27.625/29.25/30.875/32.5% AD"
+                  "value": "26/27.6/29.3/30.9/32.5% AD"
                 },
                 {
                   "attribute": "Minion Bounce Critical Damage",
-                  "value": "45.5/48.34375/51.1875/54.03125/56.875% AD"
+                  "value": "45.5/48.3/51.2/54/56.9% AD"
                 }
               ]
             },
@@ -20568,11 +20568,11 @@
                 },
                 {
                   "attribute": "Maximum Physical Damage",
-                  "value": "113.75/140/166.25/192.5/218.75 (+227.5% bonus AD)"
+                  "value": "113.8/140/166.3/192.5/218.8 (+227.5% bonus AD)"
                 },
                 {
                   "attribute": "Maximum Damage with Infinity Edge",
-                  "value": "139.75/172/204.25/236.5/268.75 (+279.5% bonus AD)"
+                  "value": "139.8/172/204.3/236.5/268.8 (+279.5% bonus AD)"
                 }
               ]
             },
@@ -20593,11 +20593,11 @@
                 },
                 {
                   "attribute": "Maximum Physical Damage",
-                  "value": "56.875/70/83.125/96.25/109.375 (+113.75% bonus AD)"
+                  "value": "56.9/70/83.1/96.3/109.4 (+113.8% bonus AD)"
                 },
                 {
                   "attribute": "Maximum Physical Damage with Infinity Edge",
-                  "value": "69.875/86/102.125/118.25/134.375 (+139.75% bonus AD)"
+                  "value": "69.9/86/102.1/118.3/134.4 (+139.8% bonus AD)"
                 }
               ]
             },
@@ -20977,7 +20977,7 @@
                 },
                 {
                   "attribute": "Root Duration",
-                  "value": "1/1.25/1.5/1.75/2 seconds"
+                  "value": "1/1.3/1.5/1.8/2 seconds"
                 }
               ]
             }
@@ -21049,7 +21049,7 @@
                 },
                 {
                   "attribute": "Bonus Damage Per Bolt",
-                  "value": "15/22.5/30/37.5/45 (+11.25% AP)"
+                  "value": "15/22.5/30/37.5/45 (+11.3% AP)"
                 },
                 {
                   "attribute": "Total Damage",
@@ -21144,11 +21144,11 @@
                 },
                 {
                   "attribute": "Heal per Tick",
-                  "value": "7.5/15/22.5 (+2.5% AP) (+0.75% of his bonus health)"
+                  "value": "7.5/15/22.5 (+2.5% AP) (+0.8% of his bonus health)"
                 },
                 {
                   "attribute": "Reduced Heal per Tick",
-                  "value": "0.75/1.5/2.25 (+0.25% AP) (+0.075% of his bonus health)"
+                  "value": "0.8/1.5/2.3 (+0.3% AP) (+0.1% of his bonus health)"
                 }
               ]
             },
@@ -21541,7 +21541,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage",
-                  "value": "75/120/165/210/255  (+6/8.470588235294118/10.941176470588236/13.411764705882353/15.882352941176471/18.352941176470587/20.823529411764707/23.294117647058826/25.764705882352942/28.235294117647058/30.705882352941178/33.1764705882353/35.64705882352941/38.11764705882353/40.58823529411765/43.05882352941177/45.529411764705884/48) (+100% AP) (+1.5% AP per 100 bonus health) (+4% bonus health)"
+                  "value": "75/120/165/210/255  (+6/8.5/10.9/13.4/15.9/18.4/20.8/23.3/25.8/28.2/30.7/33.2/35.6/38.1/40.6/43.1/45.5/48) (+100% AP) (+1.5% AP per 100 bonus health) (+4% bonus health)"
                 },
                 {
                   "attribute": "Heal",
@@ -22159,7 +22159,7 @@
                 },
                 {
                   "attribute": "Blind Duration",
-                  "value": "2/2.25/2.5/2.75/3 seconds"
+                  "value": "2/2.3/2.5/2.8/3 seconds"
                 }
               ]
             },
@@ -22240,7 +22240,7 @@
               "scalings": [
                 {
                   "attribute": "Monster Damage On-Hit",
-                  "value": "13.05/33.35/53.65/73.95/94.25 (+43.5% AP)"
+                  "value": "13.1/33.4/53.7/74/94.3 (+43.5% AP)"
                 },
                 {
                   "attribute": "Monster Damage per Tick",
@@ -22296,7 +22296,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage per Tick",
-                  "value": "50/81.25/112.5 (+12.5% AP)"
+                  "value": "50/81.3/112.5 (+12.5% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -22313,7 +22313,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "0.25",
+          "cooldown": "0.3",
           "cost": "75/55/35",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -22447,7 +22447,7 @@
               ]
             }
           ],
-          "cooldown": "13/12.25/11.5/10.75/10",
+          "cooldown": "13/12.3/11.5/10.8/10",
           "cost": "60/65/70/75/80",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -22619,7 +22619,7 @@
                 },
                 {
                   "attribute": "Stun Duration",
-                  "value": "0.4/0.55/0.7 seconds"
+                  "value": "0.4/0.6/0.7 seconds"
                 }
               ]
             }
@@ -22759,7 +22759,7 @@
                 },
                 {
                   "attribute": "Magic Damage Per Second",
-                  "value": "2.5/3.125/3.75%  of the target's maximum health (+0.25% per 100 AP)"
+                  "value": "2.5/3.1/3.8%  of the target's maximum health (+0.3% per 100 AP)"
                 }
               ]
             },
@@ -22814,7 +22814,7 @@
                 },
                 {
                   "attribute": "Additional Bonus AD",
-                  "value": "0.15/0.25/0.35/0.45/0.55 per 1% missing health"
+                  "value": "0.2/0.3/0.4/0.5/0.6 per 1% missing health"
                 },
                 {
                   "attribute": "Maximum Total Bonus AD",
@@ -22831,7 +22831,7 @@
                 },
                 {
                   "attribute": "Heal Per 1 Fury",
-                  "value": "0.5/0.95/1.4/1.85/2.3 (+1.2% AP)"
+                  "value": "0.5/1/1.4/1.9/2.3 (+1.2% AP)"
                 },
                 {
                   "attribute": "Maximum Heal",
@@ -22983,7 +22983,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "6/5.75/5.5/5.25/5",
+          "cooldown": "6/5.8/5.5/5.3/5",
           "cost": "60/70/80/90/100",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -23037,7 +23037,7 @@
                 },
                 {
                   "attribute": "Stun Duration",
-                  "value": "1/1.25/1.5/1.75/2 seconds"
+                  "value": "1/1.3/1.5/1.8/2 seconds"
                 }
               ]
             },
@@ -23358,15 +23358,15 @@
               "scalings": [
                 {
                   "attribute": "Increased Shield Strength",
-                  "value": "20/27.647058823529413/35.294117647058826/42.94117647058823/50.58823529411765/58.23529411764706/65.88235294117646/73.52941176470588/81.1764705882353/88.82352941176471/96.47058823529412/104.11764705882354/111.76470588235294/119.41176470588236/127.05882352941177/134.7058823529412/142.3529411764706/150 (+45/60/75/90/105/120) (+65% AP) (+8% maximum health)"
+                  "value": "20/27.6/35.3/42.9/50.6/58.2/65.9/73.5/81.2/88.8/96.5/104.1/111.8/119.4/127.1/134.7/142.4/150 (+45/60/75/90/105/120) (+65% AP) (+8% maximum health)"
                 },
                 {
                   "attribute": "Total Healing",
-                  "value": "10/13.823529411764707/17.647058823529413/21.470588235294116/25.294117647058826/29.11764705882353/32.94117647058823/36.76470588235294/40.58823529411765/44.411764705882355/48.23529411764706/52.05882352941177/55.88235294117647/59.70588235294118/63.529411764705884/67.3529411764706/71.1764705882353/75 (+22.5/30/37.5/45/52.5/60) (+32.5% AP) (+4% maximum health)"
+                  "value": "10/13.8/17.6/21.5/25.3/29.1/32.9/36.8/40.6/44.4/48.2/52.1/55.9/59.7/63.5/67.4/71.2/75 (+22.5/30/37.5/45/52.5/60) (+32.5% AP) (+4% maximum health)"
                 },
                 {
                   "attribute": "Heal per Tick",
-                  "value": "0.63/0.8688235294117648/1.1076470588235294/1.3464705882352943/1.585294117647059/1.8241176470588236/2.0629411764705883/2.3017647058823534/2.540588235294118/2.7794117647058827/3.0182352941176473/3.257058823529412/3.4958823529411767/3.7347058823529413/3.9735294117647064/4.212352941176471/4.451176470588236/4.69 (+1.41/1.88/2.34/2.81/3.28/3.75) (+2.03% AP) (+0.25% maximum health)"
+                  "value": "0.6/0.9/1.1/1.3/1.6/1.8/2.1/2.3/2.5/2.8/3/3.3/3.5/3.7/4/4.2/4.5/4.7 (+1.4/1.9/2.3/2.8/3.3/3.8) (+2% AP) (+0.3% maximum health)"
                 },
                 {
                   "attribute": "Increased Life Steal",
@@ -23675,7 +23675,7 @@
               "scalings": [
                 {
                   "attribute": "Minimum Physical Damage",
-                  "value": "60/106.67/153.33/200/246.67 (+86.67/93.33/100/106.67/113.33% bonus AD)"
+                  "value": "60/106.7/153.3/200/246.7 (+86.7/93.3/100/106.7/113.3% bonus AD)"
                 },
                 {
                   "attribute": "Maximum Physical Damage",
@@ -23725,11 +23725,11 @@
                 },
                 {
                   "attribute": "Maximum Bonus Magic Damage per Stack",
-                  "value": "4.5/5.25/6/6.75/7.5%  of the target's maximum health (+2.25% per 100 AP)"
+                  "value": "4.5/5.3/6/6.8/7.5%  of the target's maximum health (+2.3% per 100 AP)"
                 },
                 {
                   "attribute": "Maximum Bonus Magic Damage at Max Stacks",
-                  "value": "13.5/15.75/18/20.25/22.5%  of the target's maximum health (+6.75% per 100 AP)"
+                  "value": "13.5/15.8/18/20.3/22.5%  of the target's maximum health (+6.8% per 100 AP)"
                 }
               ]
             },
@@ -24058,7 +24058,7 @@
               "scalings": [
                 {
                   "attribute": "Stun Duration",
-                  "value": "1.5/1.75/2/2.25/2.5 seconds"
+                  "value": "1.5/1.8/2/2.3/2.5 seconds"
                 }
               ]
             },
@@ -24247,7 +24247,7 @@
               "scalings": [
                 {
                   "attribute": "Damage Per Tick",
-                  "value": "34.62/48.08/61.54 (+9.62% AP)"
+                  "value": "34.6/48.1/61.5 (+9.6% AP)"
                 },
                 {
                   "attribute": "Maximum Damage",
@@ -24437,7 +24437,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "16/15.764705882352942/15.529411764705882/15.294117647058824/15.058823529411764/14.823529411764707/14.588235294117647/14.352941176470589/14.117647058823529/13.882352941176471/13.647058823529411/13.411764705882353/13.176470588235293/12.941176470588236/12.705882352941178/12.470588235294118/12.235294117647058/12",
+          "cooldown": "16/15.8/15.5/15.3/15.1/14.8/14.6/14.4/14.1/13.9/13.6/13.4/13.2/12.9/12.7/12.5/12.2/12",
           "cost": null,
           "resource": null,
           "damageType": null,
@@ -25010,7 +25010,7 @@
               "scalings": [
                 {
                   "attribute": "Magic Damage Per Tick",
-                  "value": "20/33.75/47.5/61.25/75 (+3.75% bonus health)"
+                  "value": "20/33.8/47.5/61.3/75 (+3.8% bonus health)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -25590,7 +25590,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "10/9.25/8.5/7.75/7",
+          "cooldown": "10/9.3/8.5/7.8/7",
           "cost": "30/35/40/45/50",
           "resource": "MANA",
           "damageType": "MAGIC_DAMAGE",
@@ -25606,7 +25606,7 @@
               "scalings": [
                 {
                   "attribute": "Physical Damage Per Tick",
-                  "value": "1/1.5/2% of target's maximum health (+34.375% AD)"
+                  "value": "1/1.5/2% of target's maximum health (+34.4% AD)"
                 },
                 {
                   "attribute": "Total Physical Damage",
@@ -25884,7 +25884,7 @@
               "scalings": [
                 {
                   "attribute": "Increased Damage",
-                  "value": "83.35/141.695/200.04/258.385/316.73 (+108.355% AP)"
+                  "value": "83.4/141.7/200/258.4/316.7 (+108.4% AP)"
                 },
                 {
                   "attribute": "Increased Slow",
@@ -26238,7 +26238,7 @@
               "scalings": [
                 {
                   "attribute": "Bonus Damage per Stack",
-                  "value": "17.5/21.25/25/28.75/32.5 (+5% bonus AD) (+15% AP)"
+                  "value": "17.5/21.3/25/28.8/32.5 (+5% bonus AD) (+15% AP)"
                 },
                 {
                   "attribute": "Maximum Bonus Damage",
@@ -26516,11 +26516,11 @@
                 },
                 {
                   "attribute": "Heal",
-                  "value": "10/13.411764705882353/16.823529411764707/20.235294117647058/23.647058823529413/27.058823529411764/30.470588235294116/33.88235294117647/37.294117647058826/40.705882352941174/44.11764705882353/47.529411764705884/50.94117647058823/54.35294117647059/57.76470588235294/61.17647058823529/64.58823529411765/68 (+6/7/8/9/10% of his missing health)"
+                  "value": "10/13.4/16.8/20.2/23.6/27.1/30.5/33.9/37.3/40.7/44.1/47.5/50.9/54.4/57.8/61.2/64.6/68 (+6/7/8/9/10% of his missing health)"
                 },
                 {
                   "attribute": "Non-Champion Heal",
-                  "value": "5/6.705882352941177/8.411764705882353/10.117647058823529/11.823529411764707/13.529411764705882/15.235294117647058/16.941176470588236/18.647058823529413/20.352941176470587/22.058823529411764/23.764705882352942/25.470588235294116/27.176470588235293/28.88235294117647/30.588235294117645/32.294117647058826/34 (+3/3.5/4/4.5/5% of his missing health)"
+                  "value": "5/6.7/8.4/10.1/11.8/13.5/15.2/16.9/18.6/20.4/22.1/23.8/25.5/27.2/28.9/30.6/32.3/34 (+3/3.5/4/4.5/5% of his missing health)"
                 }
               ]
             },
@@ -26721,7 +26721,7 @@
                 },
                 {
                   "attribute": "Linger Magic Damage per Tick",
-                  "value": "1.25/5/8.75/12.5/16.25 (+10% AD) (+6.25% AP)"
+                  "value": "1.3/5/8.8/12.5/16.3 (+10% AD) (+6.3% AP)"
                 },
                 {
                   "attribute": "Total Expanded Damage",
@@ -26758,7 +26758,7 @@
                 },
                 {
                   "attribute": "Duration",
-                  "value": "1.5/1.75/2/2.25/2.5 seconds"
+                  "value": "1.5/1.8/2/2.3/2.5 seconds"
                 }
               ]
             }
@@ -26818,7 +26818,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "20/19.294117647058822/18.58823529411765/17.88235294117647/17.176470588235293/16.470588235294116/15.764705882352942/15.058823529411764/14.352941176470587/13.647058823529411/12.941176470588236/12.235294117647058/11.529411764705882/10.823529411764705/10.117647058823529/9.411764705882351/8.705882352941176/8",
+          "cooldown": "20/19.3/18.6/17.9/17.2/16.5/15.8/15.1/14.4/13.6/12.9/12.2/11.5/10.8/10.1/9.4/8.7/8",
           "cost": null,
           "resource": null,
           "damageType": null,
@@ -26981,7 +26981,7 @@
                 },
                 {
                   "attribute": "Reduced Damage per Hit",
-                  "value": "18.75/31.25/43.75 (+6.25% AP)"
+                  "value": "18.8/31.3/43.8 (+6.3% AP)"
                 },
                 {
                   "attribute": "Total Magic Damage",
@@ -27412,7 +27412,7 @@
                 },
                 {
                   "attribute": "Physical Damage per Hit",
-                  "value": "2.14/2.43/2.71/3/3.29 (+14.86/15.43/16/16.57/17.14% AD)"
+                  "value": "2.1/2.4/2.7/3/3.3 (+14.9/15.4/16/16.6/17.1% AD)"
                 }
               ]
             },
@@ -27843,11 +27843,11 @@
               "scalings": [
                 {
                   "attribute": "Minimum Magic Damage",
-                  "value": "2/4.8235294117647065/7.647058823529412/10.470588235294118/13.294117647058824/16.11764705882353/18.941176470588236/21.764705882352942/24.58823529411765/27.411764705882355/30.23529411764706/33.05882352941177/35.88235294117647/38.70588235294118/41.529411764705884/44.352941176470594/47.1764705882353/50 (+50/80/110/140/170) (+60% AP)"
+                  "value": "2/4.8/7.6/10.5/13.3/16.1/18.9/21.8/24.6/27.4/30.2/33.1/35.9/38.7/41.5/44.4/47.2/50 (+50/80/110/140/170) (+60% AP)"
                 },
                 {
                   "attribute": "Maximum Magic Damage",
-                  "value": "5/12.058823529411764/19.11764705882353/26.176470588235293/33.23529411764706/40.294117647058826/47.35294117647059/54.41176470588235/61.470588235294116/68.52941176470588/75.58823529411765/82.6470588235294/89.70588235294117/96.76470588235294/103.8235294117647/110.88235294117646/117.94117647058823/125 (+125/200/275/350/425) (+150% AP)"
+                  "value": "5/12.1/19.1/26.2/33.2/40.3/47.4/54.4/61.5/68.5/75.6/82.6/89.7/96.8/103.8/110.9/117.9/125 (+125/200/275/350/425) (+150% AP)"
                 }
               ]
             },
@@ -27884,7 +27884,7 @@
                 },
                 {
                   "attribute": "Bonus Movement Speed Duration",
-                  "value": "2/2.25/2.5/2.75/3 seconds"
+                  "value": "2/2.3/2.5/2.8/3 seconds"
                 }
               ]
             },
@@ -27914,7 +27914,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "0.25",
+          "cooldown": "0.3",
           "cost": "1",
           "resource": "OTHER",
           "damageType": "MAGIC_DAMAGE",
@@ -28006,7 +28006,7 @@
               "scalings": []
             }
           ],
-          "cooldown": "13.6/13.33235294117647/13.064705882352941/12.797058823529412/12.529411764705882/12.261764705882353/11.994117647058824/11.726470588235294/11.458823529411765/11.191176470588236/10.923529411764706/10.655882352941177/10.388235294117647/10.120588235294118/9.852941176470589/9.58529411764706/9.31764705882353/9.05",
+          "cooldown": "13.6/13.3/13.1/12.8/12.5/12.3/12/11.7/11.5/11.2/10.9/10.7/10.4/10.1/9.9/9.6/9.3/9.1",
           "cost": null,
           "resource": null,
           "damageType": null,
@@ -28071,7 +28071,7 @@
                 },
                 {
                   "attribute": "Root Duration",
-                  "value": "1/1.25/1.5/1.75/2 seconds"
+                  "value": "1/1.3/1.5/1.8/2 seconds"
                 }
               ]
             },

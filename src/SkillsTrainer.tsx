@@ -200,6 +200,8 @@ function SkillsTrainer() {
     const [gameStarted, setGameStarted] = useState(false);
     const [finished, setFinished] = useState(false);
     const [revealed, setRevealed] = useState(false);
+    const [viewedAbilityKey, setViewedAbilityKey] =
+        useState<AbilityKey | null>(null);
     const [results, setResults] = useState<AbilityResult[]>([]);
 
     // Flat queue of individual abilities (used in both modes)
@@ -317,6 +319,7 @@ function SkillsTrainer() {
                 },
             ]);
             setRevealed(false);
+            setViewedAbilityKey(null);
 
             if (queueIndex + 1 < abilityQueue.length) {
                 setQueueIndex((i) => i + 1);
@@ -561,6 +564,12 @@ function SkillsTrainer() {
     }
 
     const { champion, ability, patchLastChanged } = currentItem;
+    const championSpellSet = getSpellSet(champion);
+    const allAbilities = championSpellSet?.abilities ?? [];
+    const displayedAbility =
+        viewedAbilityKey != null
+            ? (allAbilities.find((a) => a.key === viewedAbilityKey) ?? ability)
+            : ability;
 
     return (
         <div className="min-h-screen bg-rift-dark font-body text-gray-100">
@@ -649,19 +658,59 @@ function SkillsTrainer() {
                             </button>
                         ) : (
                             <div className="w-full space-y-4">
+                                {/* Ability tab bar */}
+                                <div className="flex justify-center gap-1">
+                                    {allAbilities.map((a) => {
+                                        const isTestedAbility =
+                                            a.key === ability.key;
+                                        const isViewing =
+                                            displayedAbility.key === a.key;
+                                        return (
+                                            <button
+                                                key={a.key}
+                                                type="button"
+                                                onClick={() =>
+                                                    setViewedAbilityKey(
+                                                        a.key ===
+                                                            ability.key
+                                                            ? null
+                                                            : a.key
+                                                    )
+                                                }
+                                                className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                                                    isViewing
+                                                        ? isTestedAbility
+                                                            ? "bg-rift-gold/20 text-rift-gold ring-1 ring-rift-gold/50"
+                                                            : "bg-gray-700 text-white ring-1 ring-gray-500"
+                                                        : isTestedAbility
+                                                          ? "bg-rift-gold/10 text-rift-gold/70 hover:bg-rift-gold/20"
+                                                          : "bg-gray-800/60 text-gray-400 hover:bg-gray-700 hover:text-gray-200"
+                                                }`}
+                                            >
+                                                <span className="font-bold">
+                                                    {a.key}
+                                                </span>
+                                                <span className="hidden sm:inline">
+                                                    {a.name}
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+
                                 {/* Ability name + damage type */}
                                 <div className="flex flex-col items-center gap-1">
                                     <h3 className="text-xl font-bold text-white">
-                                        {ability.name}
+                                        {displayedAbility.name}
                                     </h3>
                                     {damageTypeLabel(
-                                        ability.damageType
+                                        displayedAbility.damageType
                                     ) != null && (
                                         <span
-                                            className={`text-xs font-medium ${damageTypeColor(ability.damageType)}`}
+                                            className={`text-xs font-medium ${damageTypeColor(displayedAbility.damageType)}`}
                                         >
                                             {damageTypeLabel(
-                                                ability.damageType
+                                                displayedAbility.damageType
                                             )}
                                         </span>
                                     )}
@@ -669,66 +718,76 @@ function SkillsTrainer() {
 
                                 {/* Effects with scalings */}
                                 <div className="space-y-3">
-                                    {ability.effects.map((effect, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="rounded-xl bg-gray-800/60 p-4"
-                                        >
-                                            <p className="text-sm leading-relaxed text-gray-200">
-                                                {effect.description}
-                                            </p>
-                                            {effect.scalings.length > 0 && (
-                                                <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-                                                    {effect.scalings.map(
-                                                        (s, si) => (
-                                                            <span
-                                                                key={si}
-                                                                className="text-xs"
-                                                            >
-                                                                <span className="font-semibold text-rift-muted">
-                                                                    {
-                                                                        s.attribute
-                                                                    }
-                                                                    :
-                                                                </span>{" "}
+                                    {displayedAbility.effects.map(
+                                        (effect, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="rounded-xl bg-gray-800/60 p-4"
+                                            >
+                                                <p className="text-sm leading-relaxed text-gray-200">
+                                                    {effect.description}
+                                                </p>
+                                                {effect.scalings.length >
+                                                    0 && (
+                                                    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                                                        {effect.scalings.map(
+                                                            (s, si) => (
                                                                 <span
-                                                                    className={damageTypeColor(
-                                                                        ability.damageType
-                                                                    )}
+                                                                    key={si}
+                                                                    className="text-xs"
                                                                 >
-                                                                    {s.value}
+                                                                    <span className="font-semibold text-rift-muted">
+                                                                        {
+                                                                            s.attribute
+                                                                        }
+                                                                        :
+                                                                    </span>{" "}
+                                                                    <span
+                                                                        className={damageTypeColor(
+                                                                            displayedAbility.damageType
+                                                                        )}
+                                                                    >
+                                                                        {
+                                                                            s.value
+                                                                        }
+                                                                    </span>
                                                                 </span>
-                                                            </span>
-                                                        )
-                                                    )}
-                                                </div>
-                                            )}
-                                        </div>
-                                    ))}
+                                                            )
+                                                        )}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )
+                                    )}
                                 </div>
 
                                 {/* Cooldown + Cost stats */}
-                                {(ability.cooldown != null ||
-                                    ability.cost != null) && (
+                                {(displayedAbility.cooldown != null ||
+                                    displayedAbility.cost != null) && (
                                     <div className="flex flex-wrap gap-4 text-sm">
-                                        {ability.cooldown != null && (
+                                        {displayedAbility.cooldown !=
+                                            null && (
                                             <div className="rounded-lg border border-gray-700 bg-gray-800/40 px-4 py-2">
                                                 <span className="text-xs font-semibold uppercase text-rift-muted">
                                                     Cooldown
                                                 </span>
                                                 <p className="text-blue-400">
-                                                    {ability.cooldown}s
+                                                    {
+                                                        displayedAbility.cooldown
+                                                    }
+                                                    s
                                                 </p>
                                             </div>
                                         )}
-                                        {ability.cost != null && (
+                                        {displayedAbility.cost != null && (
                                             <div className="rounded-lg border border-gray-700 bg-gray-800/40 px-4 py-2">
                                                 <span className="text-xs font-semibold uppercase text-rift-muted">
                                                     Cost
                                                 </span>
                                                 <p className="text-blue-400">
-                                                    {ability.cost}{" "}
-                                                    {ability.resource ?? ""}
+                                                    {displayedAbility.cost}{" "}
+                                                    {displayedAbility.resource ??
+                                                        ""}
                                                 </p>
                                             </div>
                                         )}
