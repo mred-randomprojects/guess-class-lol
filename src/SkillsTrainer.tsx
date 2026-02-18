@@ -371,7 +371,7 @@ function SkillsTrainer() {
                         <div className="flex items-center gap-2">
                             <Link
                                 to="/skills-trainer/progress"
-                                className="rounded-lg border border-rift-gold/40 px-3 py-1 text-sm text-rift-gold hover:border-rift-gold hover:bg-rift-gold/10"
+                                className="rounded-lg border border-gray-600 px-3 py-1 text-sm text-gray-300 hover:border-gray-400 hover:text-white"
                             >
                                 Progress
                             </Link>
