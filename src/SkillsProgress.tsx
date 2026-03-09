@@ -151,6 +151,24 @@ function HistoryTab({
     );
 }
 
+// DUPLICATED from SkillsTrainer.tsx
+function damageTypeColor(damageType: string | null): string {
+    if (damageType == null) return "text-gray-400";
+    if (damageType.includes("MAGIC")) return "text-blue-400";
+    if (damageType.includes("PHYSICAL")) return "text-red-400";
+    if (damageType.includes("TRUE")) return "text-white";
+    return "text-gray-400";
+}
+
+// DUPLICATED from SkillsTrainer.tsx
+function damageTypeLabel(damageType: string | null): string | null {
+    if (damageType == null) return null;
+    if (damageType.includes("MAGIC")) return "Magic damage";
+    if (damageType.includes("PHYSICAL")) return "Physical damage";
+    if (damageType.includes("TRUE")) return "True damage";
+    return null;
+}
+
 // --- Champion Detail ---
 
 function ChampionDetail({
@@ -227,6 +245,53 @@ function ChampionDetail({
                                     <MasteryBadge mastery={mastery} />
                                 </span>
                             </div>
+
+                            {spell != null && (
+                                <>
+                                    <div className="mt-2 flex flex-wrap gap-3 text-xs">
+                                        {damageTypeLabel(spell.damageType) != null && (
+                                            <span className={`font-medium ${damageTypeColor(spell.damageType)}`}>
+                                                {damageTypeLabel(spell.damageType)}
+                                            </span>
+                                        )}
+                                        {spell.cooldown != null && (
+                                            <span className="text-gray-400">
+                                                CD: <span className="text-gray-200">{spell.cooldown}</span>
+                                            </span>
+                                        )}
+                                        {spell.cost != null && (
+                                            <span className="text-gray-400">
+                                                Cost: <span className="text-gray-200">{spell.cost}</span>
+                                                {spell.resource != null && (
+                                                    <> {spell.resource}</>
+                                                )}
+                                            </span>
+                                        )}
+                                    </div>
+
+                                    {spell.effects.length > 0 && (
+                                        <div className="mt-2 space-y-2">
+                                            {spell.effects.map((effect, ei) => (
+                                                <div key={ei} className="rounded-lg bg-gray-900/50 px-3 py-2">
+                                                    <p className="text-sm leading-relaxed text-gray-300">
+                                                        {effect.description}
+                                                    </p>
+                                                    {effect.scalings.length > 0 && (
+                                                        <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                                                            {effect.scalings.map((s, si) => (
+                                                                <span key={si} className="text-xs text-gray-500">
+                                                                    <span className="text-gray-400">{s.attribute}:</span>{" "}
+                                                                    <span className="text-gray-200">{s.value}</span>
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
+                            )}
 
                             {lastFive.length > 0 && (
                                 <div className="mt-2 flex flex-wrap gap-1.5">
